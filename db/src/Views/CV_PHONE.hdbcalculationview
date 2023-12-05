@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_PHONE" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CV_PHONE.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DATA_PHONE">
+    <resourceUri>DATA_PHONE</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews/>
+<logicalModel id="DATA_PHONE">
+  <attributes>
+    <attribute id="COUNTRYCODE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRYCODE"/>
+      <keyMapping columnObjectName="DATA_PHONE" columnName="COUNTRYCODE"/>
+    </attribute>
+    <attribute id="PRIMARYPHONENUMBER" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRIMARYPHONENUMBER"/>
+      <keyMapping columnObjectName="DATA_PHONE" columnName="PRIMARYPHONENUMBER"/>
+    </attribute>
+    <attribute id="SECONDARYPHONENUMBER" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SECONDARYPHONENUMBER"/>
+      <keyMapping columnObjectName="DATA_PHONE" columnName="SECONDARYPHONENUMBER"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="PHONEID" order="1" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="PHONEID"/>
+      <measureMapping columnObjectName="DATA_PHONE" columnName="PHONEID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

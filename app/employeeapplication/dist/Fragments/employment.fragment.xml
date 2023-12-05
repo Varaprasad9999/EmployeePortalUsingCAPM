@@ -1,0 +1,613 @@
+<core:FragmentDefinition
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns:viz="sap.viz.ui5.controls" 
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data" 
+>
+    <ObjectPageSection
+        titleUppercase="false"
+        id="employmentSection"
+        title="Employment"
+    >
+        <subSections>
+            <ObjectPageSubSection
+                id="employmentSectionSS1"
+                title="Job Information"
+                titleUppercase="false"
+            >
+                <m:FlexBox
+                    justifyContent="SpaceAround"
+                    backgroundDesign="Solid"
+                    fitContainer="false"
+                    wrap="Wrap"
+                >
+                    <m:VBox>
+                        <m:Label text="Job Classification:" />
+                        <m:Text text=" " />
+
+                        <m:Text
+                            text="{DEPARTMENTNAME}"
+                            class="sapUiSmallMarginBegin"
+                        />
+                    </m:VBox>
+
+                    <!-- Add a Spacer (Empty Control) Here -->
+
+                    <m:VBox>
+                        <m:Label text="Job Title:" />
+                        <m:Text text=" " />
+
+                        <m:Text
+                            text="{JOBTITLE}"
+                            class="sapUiSmallMarginBegin"
+                        />
+                    </m:VBox>
+
+                    <m:VBox>
+                        <m:Label text="FTE:" />
+                        <m:Text text=" " />
+                        <m:Text
+                            text="1"
+                            class="sapUiSmallMarginBegin"
+                        />
+                    </m:VBox>
+
+                    <m:VBox>
+                        <m:Label text="Pay Grade:" />
+                        <m:Text text=" " />
+
+                        <m:Text
+                            text="Elite Class"
+                            class="sapUiSmallMarginBegin"
+                        />
+                    </m:VBox>
+
+                    <m:VBox>
+                        <m:Label text="Manager:" />
+                        <m:Text text=" " />
+
+                        <m:Text
+                            text="James Bond"
+                            class="sapUiSmallMarginBegin"
+                        />
+                    </m:VBox>
+                </m:FlexBox>
+            </ObjectPageSubSection>
+            <ObjectPageSubSection
+                id="employmentSectionSS2"
+                title="Employee Details"
+                titleUppercase="false"
+            >
+                <!-- <m:Text text="Hi this is console!" /> -->
+
+                <m:FlexBox
+                    direction="Column"
+                    alignItems="Start"
+                    justifyContent="SpaceBetween"
+                    backgroundDesign="Solid"
+                    fitContainer="true"
+                    wrap="Wrap"
+                >
+                    <m:VBox>
+                        <m:Label
+                            text="Leaves:"
+                            design="Bold"
+                        />
+                        <m:Text text=" " />
+
+
+
+                        <m:Table
+                            id="leavesTable"
+                            items="{path: 'LEAVES', 
+                            filters: [{path : 'COUNTOFDAYS', operator: 'NE', value1: '8'}], 
+                            sorter : [{path: 'APPLIEDDATE' , descending : true}]}"
+                            width="100%"
+                            class="sapUiSmallMarginBeginEnd"
+                            mode="SingleSelectLeft"
+                        >
+                            <m:columns>
+                                <m:Column>
+                                    <m:Text text="APPLIED DATE" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="START DATE" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="END DATE" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="COUNT OF DAYS" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="HALF DAYS" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="REASON" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="APPROVAL STATUS" />
+                                </m:Column>
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem>
+                                    <m:cells>
+                                        <m:Text
+                                            text="{path: 'APPLIEDDATE', formatter: '.dateFormatter.funDate'}"
+                                        />
+                                        <m:Text
+                                            text="{path: 'STARTDATE', formatter: '.dateFormatter.funDate'}"
+                                        />
+                                        <m:Text
+                                            text="{path: 'ENDDATE', formatter: '.dateFormatter.funDate'}"
+                                        />
+                                        <m:Text text="{COUNTOFDAYS}" />
+                                        <m:Text text="{HALFDAYDESCRIPTION}" />
+                                        <m:Text text="{REASON}" />
+                                        <m:Text text="{STATUS}" />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table>
+                    </m:VBox>
+
+                    <m:FlexBox
+                        height="100px"
+                        alignItems="Start"
+                        justifyContent="End"
+                    >
+                        <m:Button
+                            id="ApplyLeave"
+                            press="OnApplyNewLeave"
+                            type="Accept"
+                            text="Apply Leave"
+                            class="sapUiSmallMarginEnd"
+                        />
+
+                        <m:Button
+                            id="EditLeaves"
+                            press="OnEditLeave"
+                            type="Attention"
+                            text="Edit Leave"
+                            class="sapUiSmallMarginEnd"
+                        />
+
+                        <m:Button
+                            id="LeaveDelete"
+                            press="onDeleteLeaves"
+                            type="Reject"
+                            text="Cancel Leave"
+                            class="sapUiSmallMarginEnd"
+                        />
+                    </m:FlexBox>
+
+
+
+                    <!-- <viz:VizFrame  id="idDonutChart2" vizType="donut" height="550px" width="550px"
+						vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Leave Analytics of Employee'}}">
+						<viz:dataset>
+							<viz.data:FlattenedDataset data="{LEAVES}">
+								<viz.data:dimensions>
+									<viz.data:DimensionDefinition name="Reason" value="{REASON}" />
+								</viz.data:dimensions>
+								<viz.data:measures>
+									<viz.data:MeasureDefinition name="Count" value="{COUNTOFDAYS}"/>
+								</viz.data:measures>
+							</viz.data:FlattenedDataset>
+						</viz:dataset>
+						<viz:feeds>
+							<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+							<viz.feeds:FeedItem uid="color" type="Dimension" values="Reason"/>
+						</viz:feeds>
+					</viz:VizFrame> -->
+
+
+
+                    <m:Button 
+                     id="pieChartButton"
+                     text="Show Leave Analytics"
+                     class="sapUiSmallMarginBottom"
+                     type="Emphasized"
+                     press="openPieChart"
+                    ></m:Button>
+                 
+
+                    <!-- <viz:VizFrame xmlns="sap.viz" id="leavePieChart2" vizType="donut" width="100%" height="100%"
+						vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Leave Analytics but not working inside an object page layout.'}}">
+						<viz:dataset>
+							<vizData:FlattenedDataset data="{LEAVES}">
+								<vizData:dimensions>
+									<vizData:DimensionDefinition name="Reason" value="{REASON}"/>
+								</vizData:dimensions>
+								<vizData:measures>
+									<vizData:MeasureDefinition name="Count" value="{COUNTOFDAYS}"/>
+								</vizData:measures>
+							</vizData:FlattenedDataset>
+						</viz:dataset>
+						<viz:feeds>
+							<vizFeeds:FeedItem uid="size" type="Measure" values='Employee Count'/>
+							<vizFeeds:FeedItem uid="color" type="Dimension" values="Department"/>
+						</viz:feeds>
+					</viz:VizFrame> -->
+
+                    
+
+                  
+
+                
+                   
+
+
+                    
+
+
+                    <!-- <core:Fragment fragmentName = "com.amista.employeeapplication.Fragments.applyLeaves" type="XML" /> -->
+<!-- 
+                    <m:VBox>
+                        <m:Text text=" " />
+                    </m:VBox> -->
+
+                    <m:VBox>
+                        <m:Label
+                            text="Expenses:"
+                            design="Bold"
+                            id="EmpExpensesInformation"
+                        />
+                        <m:Text text=" " />
+                        <m:Table
+                            id="EmpExpenseInformation"
+                            width="100%"
+                            visible="false"
+                            items="{EXPENSENS}"
+                            class="sapUiSmallMarginBeginEnd"
+                            mode="MultiSelect"
+                        >
+                            <m:columns>
+                                <m:Column>
+                                    <m:Text text="Expense Date" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Expense Type" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Description" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Receipt Number" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Amount" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Approval Status" />
+                                </m:Column>
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem>
+                                    <m:cells>
+                                        <m:Text
+                                            text="{path: 'EXPENSEDATE', formatter: '.dateFormatter.funDate'}"
+                                        />
+                                        <m:Text text="{EXPENSETYPE}" />
+                                        <m:Text text="{DESCRIPTION}" />
+                                        <m:Text text="{RECEIPTNUMBER}" />
+                                        <m:Text text="{AMOUNT}" />
+                                        <m:Text text="{APPROVALSTATUS}" />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table>
+                    </m:VBox>
+                    <m:HBox>
+                        <m:VBox alignItems="Start">
+                            <m:Button
+                                id="ExpenseButton"
+                                press="OnClickExpenses"
+                                text="Show Expenses"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </m:VBox>
+                        <m:VBox alignItems="End">
+                            <m:Button
+                                id="AddExpenses"
+                                press="OnAddNewExpense"
+                                text="Add Expense"
+                                type="Accept"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </m:VBox>
+                        <m:VBox>
+                            <m:Button
+                                id="ExpenseDelete"
+                                press="onDeleteExpense"
+                                type="Reject"
+                                text="Delete Expense"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </m:VBox>
+                    </m:HBox>
+
+                    <!-- <core:Fragment fragmentName = "com.amista.employeeapplication.Fragments.addExpenses" type="XML" /> -->
+                </m:FlexBox>
+            </ObjectPageSubSection>
+
+            <ObjectPageSubSection
+                id="employmentSectionSS3"
+                title="Extra Employee Details"
+                titleUppercase="false"
+            >
+                <m:FlexBox
+                    direction="Column"
+                    alignItems="Start"
+                    justifyContent="SpaceBetween"
+                    backgroundDesign="Solid"
+                    fitContainer="true"
+                    wrap="Wrap"
+                >
+                    <!-- LOGISTICS Bidda-->
+                    <m:VBox>
+                        <m:Label
+                            text="Logistics:"
+                            design="Bold"
+                        />
+                        <m:Text text=" " />
+
+                        <m:Table
+                            id="logisticsTable"
+                            items="{LOGISTICS}"
+                            width="100%"
+                            class="sapUiSmallMarginBeginEnd"
+                            mode="SingleSelectLeft"
+                        >
+                            <m:columns>
+                                <m:Column>
+                                    <m:Text text="Item Name" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Quantity" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Pickup Date" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Return Date" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Cost to Company" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Cost Category" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Approval Status" />
+                                </m:Column>
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem>
+                                    <m:cells>
+                                        <m:Text text="{ITEMNAME}" />
+                                        <m:Text text="{QUANTITY}" />
+                                        <m:Text
+                                            text="{path: 'PICKUPDATE', formatter: '.dateFormatter.funDate'}"
+                                        />
+                                        <m:Text
+                                            text="{path: 'RETURNDATE', formatter: '.dateFormatter.funDate'}"
+                                        />
+                                        <m:Text text="{COSTTOCOMPANY}" />
+                                        <m:Text text="{COSTCATEGORY}" />
+                                        <m:Text text="{APPROVALSTATUS}" />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table>
+                    </m:VBox>
+                    <m:HBox>
+                        <m:VBox>
+                            <m:Button
+                                id="LogisticDelete"
+                                press="onDeleteLogistic"
+                                type="Reject"
+                                text="Delete Logistic"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </m:VBox>
+                    </m:HBox>
+
+                    <m:VBox>
+                        <m:Text text=" " />
+                        <m:Text text=" " />
+                    </m:VBox>
+
+                    <!-- PAYSLIPS -->
+                    <m:VBox>
+                        <m:Label
+                            text="Payslips:"
+                            design="Bold"
+                        />
+                        <m:Text text=" " />
+
+                        <m:Table
+                            id="payslipsTable"
+                            items="{path: 'PAYSLIPS', 
+                            sorter: {path: 'PAYSLIPDATE', descending: true} }"
+                            width="100%"
+                            class="sapUiSmallMarginBeginEnd"
+                            visible="false"
+                            mode="SingleSelectLeft"
+                        >
+                            <m:columns>
+                                <m:Column>
+                                    <m:Text text="Payslip Date" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Salary" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Overtime Pay" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Bonus" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Deductions" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Tax" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Net Pay" />
+                                </m:Column>
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem>
+                                    <m:cells>
+                                        <m:Text
+                                            text="{path: 'PAYSLIPDATE', formatter: '.dateFormatter.funDate' }"
+                                        />
+                                        <m:Text text="{SALARY}" />
+                                        <m:Text text="{OVERTIMEPAY}" />
+                                        <m:Text text="{BONUS}" />
+                                        <m:Text text="{DEDUCTIONS}" />
+                                        <m:Text text="{TAX}" />
+                                        <m:Text text="{NETPAY}" />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table>
+                    </m:VBox>
+                    <m:HBox>
+                        <m:VBox alignItems="Start">
+                            <m:Button
+                                id="PayslipButton"
+                                press="OnClickPayslips"
+                                text="Show Payslips"
+                                class="sapUiSmallMarginEnd"
+                            />
+                        </m:VBox>
+                        <m:VBox >
+                                <m:Button icon="sap-icon://download" text="Download Payslip" type="Emphasized" press="onClickDownload" id="download"/>
+                        </m:VBox>
+                    </m:HBox>
+                </m:FlexBox>
+            </ObjectPageSubSection>
+        </subSections>
+    </ObjectPageSection>
+</core:FragmentDefinition>
+<!-- <m:List items="{/LEAVES}">
+                                <m:Label
+                                    text="Leaves "
+                                    design="Bold"
+                                />
+                                <m:Text text=" " />
+    <m:StandardListItem title="STARTDATE:" description="{STARTDATE}" />
+    <m:StandardListItem title="ENDDATE:" description="{ENDDATE}" />
+    <m:StandardListItem title="REASON:" description="{REASON}" />
+    <m:StandardListItem title="STATUS:" description="{STATUS}" />
+    <m:StandardListItem title="COUNTOFDAYS:" description="{COUNTOFDAYS}" />
+    <m:StandardListItem title="REASON:" description="{REASON}" />
+</m:List> -->
+<!-- <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <Table items="{mainModel>/SalesOrder}" id="table0" mode="SingleSelectLeft" selectionChange="onSelect">
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+                                        <ToolbarSpacer />
+                                        <SearchField id="searchField" width="20%" placeholder="search" search=".onSearch" />
+                                        <Button id="createButton" icon="sap-icon://add" tooltip="Create" visible="true" press="onOpenAddDialog">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                            </layoutData>
+                                        </Button>
+                                        <Button id="deleteButton" icon="sap-icon://delete" tooltip="Delete" visible="false" press="onDelete">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                            </layoutData>
+                                        </Button>
+
+                                        <Button id="saveButton" text="Save" type="Emphasized" visible="false" enabled="true" press="onSave" />
+                                        <Button id="editModeButton" visible="true" icon="sap-icon://edit" tooltip="Edit" press="onEditMode">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                            </layoutData>
+                                        </Button>
+
+                                    </content>
+                                    <dependents>
+                                        <Dialog id="OpenDialog" title="Create Sales Order">
+                                            <buttons>
+                                                <Button id="confirmCreate" text="Create" press=".onCreate" type="Emphasized" />
+                                                <Button id="cancelCreate" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <Label text="SO Number" required="true" />
+                                                    <Input id="idSo" change="onNameChange" />
+                                                    <Label text="Customer Name" />
+                                                    <Input id="idCustName" rows="4" />
+                                                    <Label text="Customer Number" />
+                                                    <Input id="idCustomer" rows="4" />
+                                                    <Label text="Po Number" />
+                                                    <Input id="idPo" rows="4" />
+                                                    <Label text="Inquiry Number" />
+                                                    <Input id="idInqNumber" rows="4" />
+                                                </form:content>
+                                            </form:SimpleForm>
+                                        </Dialog>
+                                    </dependents>
+
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <items>
+                                <ColumnListItem type="Active" id="item0">
+                                    <cells>
+                                        <Text id="id1" text="{mainModel>soNumber}"/>
+                                        <Text id="id2" text="{mainModel>customerName}"/>
+                                        <Text id="id3" text="{mainModel>customerNumber}"/>
+                                        <Text id="id4" text="{mainModel>PoNumber}"/>
+                                        <Text id="id5" text="{mainModel>inquiryNumber}"/>
+                                        <Button id="id6" icon="sap-icon://edit" onPress="onSelect" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="So Number" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Customer Name" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Customer Number" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="PO Number" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Inquiry Number" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell> -->

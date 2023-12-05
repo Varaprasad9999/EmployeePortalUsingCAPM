@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_DEPARTMENT" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CV_DEPARTMENT.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DATA_DEPARTMENT">
+    <resourceUri>DATA_DEPARTMENT</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews/>
+<logicalModel id="DATA_DEPARTMENT">
+  <attributes>
+    <attribute id="DEPARTMENTNAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENTNAME"/>
+      <keyMapping columnObjectName="DATA_DEPARTMENT" columnName="DEPARTMENTNAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="DEPARTMENTID" order="1" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="DEPARTMENTID"/>
+      <measureMapping columnObjectName="DATA_DEPARTMENT" columnName="DEPARTMENTID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="DEPARTMENTMANAGERID" order="3" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="DEPARTMENTMANAGERID"/>
+      <measureMapping columnObjectName="DATA_DEPARTMENT" columnName="DEPARTMENTMANAGERID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="BUDGET" order="4" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="BUDGET"/>
+      <measureMapping columnObjectName="DATA_DEPARTMENT" columnName="BUDGET"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

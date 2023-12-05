@@ -1,0 +1,74 @@
+<mvc:View
+    controllerName="com.amista.employeeapplication.controller.EmployeePortalView"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+        showNavButton="true"
+        navButtonPress="onPressBackButton"
+    >
+        <content />
+        <!-- <Table
+            headerText="Employee Details"
+            items="{/EMPLOYEE}"
+        >
+            <columns>
+                <Column>
+                    <Text text="Employee ID" />
+                </Column>
+                <Column>
+                    <Text text="First Name" />
+                </Column>
+                <Column>
+                    <Text text="Last Name" />
+                </Column>
+                <Column>
+                    <Text text="Email" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation">
+                    <cells>
+                        <Text text="{EMPID}" />
+                        <Text text="{FIRSTNAME}" />
+                        <Text text="{LASTNAME}" />
+                        <Text text="{EMAIL}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table> -->
+
+        <!-- <Text text="Hi! I am Groot."></Text> -->
+
+        <List
+            headerText="Employees Details"
+            items="{/EMPLOYEE}"
+            growingScrollToLoad="true"
+        >
+            <ObjectListItem
+                title="{= ${FIRSTNAME} + ' ' + ${LASTNAME} }"
+                press="onListItemPress"
+                type="Navigation"
+                number="{= ${COUNTRYCODE} +' '+ ${PRIMARYPHONENUMBER} }"
+            >
+                <firstStatus>
+                    <ObjectStatus
+                        text="{EMPID}"
+                        icon="sap-icon://sys-enter-2"
+                        state="{path: 'EMPID', formatter: '.FormatID.funID'}"
+                    />
+                </firstStatus>
+                <ObjectAttribute text="{EMAIL}" />
+                <ObjectAttribute
+                    text="{= ${CITY} +', ' + ${STATE} +', '+ ${COUNTRY}}"
+                />
+                <!-- <ObjectAttribute text="{CITY}" ></ObjectAttribute> -->
+            </ObjectListItem>
+        </List>
+
+        
+    </Page>
+</mvc:View>

@@ -1,0 +1,90 @@
+<core:FragmentDefinition
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns:viz="sap.viz.ui5.controls" 
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data" 
+    displayBlock="true"
+>
+<m:Dialog
+    title="Analytics"
+    id="leaveAnalyticsChart"
+    contentWidth="auto"
+    contentHeight="auto"
+    draggable="true"
+>
+<!-- <viz:VizFrame  id="idDonutChart" vizType="donut" width="40%" height="40%"
+						vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Leave Analytics of Employee'}}">
+						<viz:dataset>
+							<viz.data:FlattenedDataset data="{LEAVES}">
+								<viz.data:dimensions>
+									<viz.data:DimensionDefinition name="Reason" value="{REASON}" />
+								</viz.data:dimensions>
+								<viz.data:measures>
+									<viz.data:MeasureDefinition name="Count" value="{COUNTOFDAYS}"/>
+								</viz.data:measures>
+							</viz.data:FlattenedDataset>
+						</viz:dataset>
+						<viz:feeds>
+							<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+							<viz.feeds:FeedItem uid="color" type="Dimension" values="Reason"/>
+						</viz:feeds>
+					</viz:VizFrame> -->
+                    
+                    <!-- <viz:Popover id="idPopOver"></viz:Popover> -->
+                    <!-- <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
+             vizType='donut'
+             vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:i18n>leaveAnalytics}}">
+    <viz:dataset>
+        <viz.data:FlattenedDataset data="{LEAVES}">
+            <viz.data:dimensions>
+                <viz.data:DimensionDefinition name="Reason" value="{REASON}" />
+            </viz.data:dimensions>
+            <viz.data:measures>
+                <viz.data:MeasureDefinition name="Count" value="{COUNTOFDAYS}" />
+            </viz.data:measures>
+        </viz.data:FlattenedDataset>
+    </viz:dataset>
+
+    <viz:feeds>
+        <viz.feeds:FeedItem uid="size" type="Measure" values="Count" />
+        <viz.feeds:FeedItem uid="color" type="Dimension" values="Reason" />
+    </viz:feeds>
+</viz:VizFrame> -->
+
+                    <viz:VizFrame  id="idDonutChart2" vizType="donut" height="550px" width="550px"
+						vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Leave Analytics of Employee'}}">
+						<viz:dataset>
+							<viz.data:FlattenedDataset data="{LEAVES}">
+								<viz.data:dimensions>
+									<viz.data:DimensionDefinition name="Reason" value="{REASON}" />
+								</viz.data:dimensions>
+								<viz.data:measures>
+									<viz.data:MeasureDefinition name="Count" value="{COUNTOFDAYS}"/>
+								</viz.data:measures>
+							</viz.data:FlattenedDataset>
+						</viz:dataset>
+						<viz:feeds>
+							<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+							<viz.feeds:FeedItem uid="color" type="Dimension" values="Reason"/>
+						</viz:feeds>
+					</viz:VizFrame>
+
+
+ <m:Button
+            text="Close"
+            type="Reject"
+            press="onCancelLeave"
+            class="sapUiSmallMarginEnd"
+        />
+
+</m:Dialog>
+
+       
+
+
+</core:FragmentDefinition>

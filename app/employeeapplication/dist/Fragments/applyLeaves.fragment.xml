@@ -1,0 +1,263 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:c="sap.ui.webc.main"
+>
+    <Dialog
+        title="Applying for a Leave"
+        id="applyLeaveDialog"
+        draggable="true"
+        contentWidth="600px"
+        contentHeight="auto"
+    >
+        <VBox class="sapUiSmallMargin">
+            <f:Form
+                id="FormLeaveDisplay"
+                editable="true"
+            >
+                <f:title>
+                    <core:Title
+                        id="toggleLeaveApplyEdit"
+                        text="{= ${LeaveApplication>/leaveDisplay} ? 'Edit Leave' : 'Apply Leave'}"
+                    />
+                </f:title>
+                <f:layout>
+                    <f:ColumnLayout
+                        columnsM="2"
+                        columnsL="3"
+                        columnsXL="4"
+                    />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:formElements>
+                            <f:FormElement label="Application Date">
+                                <c:DatePicker
+                                    id="appliedDateInput"
+                                    placeholder="Today's Date"
+                                    value="{LeaveApplication>/APPLIEDDATE}"
+                                    width="100%"
+                                    required="true"
+                                    readonly="true"
+                                />
+                                <!-- value="{formatter: '.dateFormatter.getCurrentDate'}" -->
+                            </f:FormElement>
+                            <f:FormElement label="Start Date">
+                                <c:DatePicker
+                                    id="startDateInput"
+                                    placeholder="Start Date"
+                                    width="100%"
+                                    required="true"
+                                    change="onDateChange"
+                                    value="{LeaveApplication>/STARTDATE}"
+                                    formatPattern="long"
+                                    minDate="{path: 'HIREDATE', formatter: '.dateFormatter.funDate'}"
+                                />
+                                <!-- value="{formatter: '.dateFormatter.getCurrentDate'}" -->
+                            </f:FormElement>
+                            <f:FormElement
+                                label="Half Day"
+                                visible="true"
+                                id="startHalfDayForm"
+                            >
+                                <CheckBox
+                                    text="Start Date as Half Day"
+                                    id="startHalfDay"
+                                    select="onSelectHalfDay"
+                                    visible="true"
+                                    selected="{LeaveApplication>/FIRSTDAYHALFDAY}"
+                                />
+                                <RadioButtonGroup
+                                    id="firstHalfDayGroup"
+                                    select="onHalfDayChange"
+                                    enabled="false"
+                                    selectedIndex="{LeaveApplication>/FRISTDAYAM}"
+                                    visible="true"
+                                >
+                                    <buttons>
+                                        <RadioButton
+                                            text="AM"
+                                            id="am1"
+                                        />
+                                        <RadioButton
+                                            text="PM"
+                                            id="pm1"
+                                        />
+                                    </buttons>
+                                </RadioButtonGroup>
+                            </f:FormElement>
+                            <f:FormElement label="End Date">
+                                <c:DatePicker
+                                    id="endDateInput"
+                                    placeholder="End Date"
+                                    width="100%"
+                                    value="{LeaveApplication>/ENDDATE}"
+                                    change="onDateChange"
+                                    required="true"
+                                    minDate="{LeaveApplication>/STARTDATE}"
+                                    formatPattern="long"
+                                />
+                            </f:FormElement>
+
+                            <f:FormElement label="Half Day">
+                                <CheckBox
+                                    text="End Date as Half Day"
+                                    id="endHalfDay"
+                                    select="onSelectHalfDay"
+                                    selected="{LeaveApplication>/ENDDAYHALFDAY}"
+                                />
+                                <RadioButtonGroup
+                                    id="secondHalfDayGroup"
+                                    select="onHalfDayChange2"
+                                    enabled="false"
+                                    selectedIndex="{LeaveApplication>/ENDDAYAM}"
+                                >
+                                    <RadioButton
+                                        id="am2"
+                                        text="AM"
+                                    />
+                                    <RadioButton
+                                        id="pm2"
+                                        text="PM"
+                                    />
+                                </RadioButtonGroup>
+                            </f:FormElement>
+
+                            <f:FormElement label="Count of Days">
+                                <Input
+                                    id="daysCount"
+                                    placeholder="Count of Days"
+                                    value="{LeaveApplication>/COUNTOFDAYS}"
+                                    valueState="None"
+                                    liveChange="onLeaveDayCountChange"
+                                />
+                            </f:FormElement>
+                            <f:FormElement label="Reason (Type or Choose)">
+                                <!-- <Select      does not allow the user to type a custom value hence went for comboBox
+                                    forceSelection="false"
+                                    id="leaveReason"
+                                    selectedKey="{LeaveApplication>/Reason}"
+                                    required="true"
+                                >
+                                    <core:Item
+                                        key="Casual"
+                                        text="Casual"
+                                    />
+
+                                    <core:Item
+                                        key="Sick"
+                                        text="Sick"
+                                    />
+
+                                    <core:Item
+                                        key="Vacation"
+                                        text="Vacation"
+                                    />
+                                </Select> -->
+
+                                <ComboBox 
+                                placeholder="Type or Choose Reason"
+                                id="leaveReason"
+                                selectedKey="{LeaveApplication>/REASON}"
+                                required="true"
+                                showClearIcon="true"
+                                editable="true"
+                                selectionChange="onEnteringReason"
+                                >
+                                <core:Item
+                                        key="Casual"
+                                        text="Casual"
+                                    />
+
+                                    <core:Item
+                                        key="Sick"
+                                        text="Sick"
+                                    />
+
+                                    <core:Item
+                                        key="Vacation"
+                                        text="Vacation"
+                                    />
+
+                                    <core:Item key="Other" text="Other"></core:Item>
+                                
+                                </ComboBox>
+                            </f:FormElement>
+
+                            <f:FormElement label="Approval Status">
+                                <Select
+                                forceSelection="false"
+                                    id="leaveStatus"
+                                    selectedKey="{LeaveApplication>/STATUS}"
+                                    change="onStatusChange"
+                                    required="true"
+                                >
+                                    <core:Item
+                                        key="Approved"
+                                        text="Approved"
+                                    />
+                                    <core:Item
+                                        key="Rejected"
+                                        text="Rejected"
+                                    />
+
+                                    <core:Item key="Pending" text="Pending"></core:Item>
+                                </Select>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </VBox>
+
+        <Button
+            text="{= ${LeaveApplication>/leaveDisplay} ? 'Edit Leave' : 'Apply Leave'}"
+            type="Emphasized"
+            press="onSaveLeave"
+            class="sapUiSmallMarginBeginEnd"
+        />
+        <Button
+            id="_fragmenttwo"
+            text="Cancel"
+            type="Reject"
+            press="onCancelLeave"
+            class="sapUiSmallMarginEnd"
+        />
+    </Dialog>
+</core:FragmentDefinition>
+<!-- <VBox class="sapUiContentPadding" >
+            
+
+            <c:DatePicker
+                id="startDateInput"
+                placeholder="Start Date"
+                width="100%"
+            />
+
+            <c:DatePicker
+                id="endDateInput"
+                placeholder="End Date"
+                width="100%"
+            />
+            
+
+            <Input
+                id="reasonInput"
+                placeholder="Reason"
+                width="100%"
+            />
+            
+ 
+            <Button text="Apply" type="Emphasized" press="onApplyLeave" />
+            
+        </VBox> -->
+<!-- <f:FormElement label="Approval Status">
+                                <Input
+                                    id="leaveStatus2"
+                                    placeholder="Approval Status"
+                                    value="{STATUS}"
+                                    required="true"
+                                />
+                            </f:FormElement> -->

@@ -1,0 +1,119 @@
+####READ REQ - USERS
+GET http://localhost:4004/details-employee-services/USERS
+
+####READ REQ - ROLES
+GET http://localhost:4004/details-employee-services/ROLES
+
+####CREATE USER
+POST http://localhost:4004/details-employee-services/USERS
+Content-Type: application/json
+
+{
+      "USERID": 2,
+      "NAME": "Jill",
+      "DATEOFBIRTH": "1990-02-02",
+      "GENDER": "Male"
+}
+
+####UPDATE USER
+PUT http://localhost:4004/details-employee-services/USERS/2
+Content-Type: application/json
+
+{
+    "NAME": "Modified_Jill"
+}
+
+####DELETE USER
+DELETE http://localhost:4004/details-employee-services/USERS/4
+
+####CREATE action
+POST  http://localhost:4004/details-employee-services/getName
+Content-Type: application/json
+
+{
+        "COMPANYID": 14,
+
+}
+
+
+
+
+
+
+
+####DEEP READ USER
+GET http://localhost:4004/details-employee-services/USERS?$expand=ROLES
+
+####DEEP INSERT/CREATE USER
+POST http://localhost:4004/details-employee-services/USERS
+Content-Type: application/json;IEEE754Compatible=true
+
+{
+    "USERID": 4,
+      "NAME": "Jones",
+      "DATEOFBIRTH": "1990-03-03",
+      "GENDER": "Male",
+      "ROLES": 
+        [{
+          "ROLEID": 8,
+          "USERID": 3,
+          "ROLENAME": "Developer"
+        }]
+}
+
+####DEEP  UPDATE  IF PUT then left out columns will be NULL instead of retaining their old values.
+PATCH http://localhost:4004/details-employee-services/USERS/3 
+Content-Type: application/json
+
+{
+    "USERID": 3,
+      "NAME": "James",
+      "DATEOFBIRTH": "1990-03-03",
+      "GENDER": "Male",
+      "ROLES": 
+        [{
+          "ROLEID": 1,
+          "USERID": 3,
+          "ROLENAME": "Developer"
+        }]
+}
+
+
+
+
+
+####READ MYTABLE
+GET http://localhost:4004/details-employee-services/TABLE
+
+####POST MYTABLE
+POST http://localhost:4004/details-employee-services/TABLE
+Content-Type: application/json 
+
+{
+  "ID" : 1,
+  "NAME" : "VARA"
+}
+
+
+####read OTHERTABLE
+GET http://localhost:4004/details-employee-services/OTHERTABLE
+
+####POST OTHERTABLE
+POST http://localhost:4004/details-employee-services/OTHERTABLE
+Content-Type: application/json
+
+{
+  "Id" : 22,
+  "Title" : "TrailDerail"
+}
+
+####UPDATE OTHERTABLE
+
+PATCH http://localhost:4004/details-employee-services/OTHERTABLE/22
+Content-Type: application/json
+
+{
+  "Title" : "Changed_Title"
+}
+
+

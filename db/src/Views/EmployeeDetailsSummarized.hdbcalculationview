@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="EmployeeDetailsSummarized" applyPrivilegeType="SQL_ANALYTIC_PRIVILEGE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="EmployeeDetailsSummarized"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DATA_EMPLOYEE">
+    <resourceUri>DATA_EMPLOYEE</resourceUri>
+  </DataSource>
+  <DataSource id="DATA_DEPARTMENT">
+    <resourceUri>DATA_DEPARTMENT</resourceUri>
+  </DataSource>
+  <DataSource id="DATA_COMPANY">
+    <resourceUri>DATA_COMPANY</resourceUri>
+  </DataSource>
+  <DataSource id="DATA_ADDRESS">
+    <resourceUri>DATA_ADDRESS</resourceUri>
+  </DataSource>
+  <DataSource id="DATA_QUALIFICATION">
+    <resourceUri>DATA_QUALIFICATION</resourceUri>
+  </DataSource>
+  <DataSource id="DATA_PHONE">
+    <resourceUri>DATA_PHONE</resourceUri>
+  </DataSource>
+  <DataSource id="DATA_EXPENSENS">
+    <resourceUri>DATA_EXPENSENS</resourceUri>
+  </DataSource>
+  <DataSource id="DATA_LOGISTICS">
+    <resourceUri>DATA_LOGISTICS</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="EMPID"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="COMPANYID"/>
+      <viewAttribute id="DEPARTMENTID"/>
+      <viewAttribute id="HIREDATE"/>
+      <viewAttribute id="SALARY"/>
+      <viewAttribute id="JOBID"/>
+      <viewAttribute id="PHONEID"/>
+      <viewAttribute id="EMAIL"/>
+      <viewAttribute id="ADDRESSID"/>
+      <viewAttribute id="QUALIFICATIONID"/>
+    
+      <viewAttribute id="ROLE"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="CC_SALARY" datatype="NVARCHAR" length="100" expressionLanguage="SQL">
+        <formula>CASE
+        WHEN &quot;SALARY&quot; &lt;= 40000 THEN 'Salary is between 0 and 40000'
+        WHEN &quot;SALARY&quot; &lt;= 50000 THEN 'Salary is between 40000 and 50000'
+        ELSE 'Salary is greater than 50000'
+END
+</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="DATA_EMPLOYEE"/>
+    <filter>&quot;EMPID&quot; &lt; 5</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="DEPARTMENTID"/>
+      <viewAttribute id="DEPARTMENTNAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DATA_DEPARTMENT"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+    <viewAttributes>
+      <viewAttribute id="COMPANYID"/>
+      <viewAttribute id="COMPANYNAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DATA_COMPANY"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_4">
+    <viewAttributes>
+      <viewAttribute id="EMPID"/>
+      <viewAttribute id="STREET"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="STATE"/>
+      <viewAttribute id="POSTALCODE"/>
+      <viewAttribute id="COUNTRY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DATA_ADDRESS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_5">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="HIGHESTDEGREE"/>
+      <viewAttribute id="FIELDOFSTUDY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DATA_QUALIFICATION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_6">
+    <viewAttributes>
+      <viewAttribute id="PHONEID"/>
+      <viewAttribute id="PRIMARYPHONENUMBER"/>
+      <viewAttribute id="SECONDARYPHONENUMBER"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DATA_PHONE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="EMPID" aggregationType="sum"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="COMPANYID" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENTID" aggregationType="sum"/>
+      <viewAttribute id="HIREDATE"/>
+      <viewAttribute id="JOBID" aggregationType="sum"/>
+      <viewAttribute id="PHONEID" aggregationType="sum"/>
+      <viewAttribute id="EMAIL"/>
+      <viewAttribute id="ADDRESSID" aggregationType="sum"/>
+      <viewAttribute id="QUALIFICATIONID" aggregationType="sum"/>
+      <viewAttribute id="CC_SALARY"/>
+      <viewAttribute id="DEPARTMENTNAME"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute hidden="true" id="JOIN$DEPARTMENTID$DEPARTMENTID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTNAME" source="FIRSTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYID" source="COMPANYID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTID" source="DEPARTMENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIREDATE" source="HIREDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOBID" source="JOBID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PHONEID" source="PHONEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSID" source="ADDRESSID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUALIFICATIONID" source="QUALIFICATIONID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CC_SALARY" source="CC_SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ROLE" source="ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DEPARTMENTID$DEPARTMENTID" source="DEPARTMENTID"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTNAME" source="DEPARTMENTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$DEPARTMENTID$DEPARTMENTID" source="DEPARTMENTID"/>
+    </input>
+    <joinAttribute name="JOIN$DEPARTMENTID$DEPARTMENTID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2_1" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_2" multiJoinCentralTable="Join_1" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="EMPID" aggregationType="sum"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="COMPANYID" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENTID" aggregationType="sum"/>
+      <viewAttribute id="HIREDATE"/>
+      <viewAttribute id="JOBID" aggregationType="sum"/>
+      <viewAttribute id="PHONEID" aggregationType="sum"/>
+      <viewAttribute id="EMAIL"/>
+      <viewAttribute id="ADDRESSID" aggregationType="sum"/>
+      <viewAttribute id="QUALIFICATIONID" aggregationType="sum"/>
+      <viewAttribute id="CC_SALARY"/>
+      <viewAttribute id="DEPARTMENTNAME"/>
+      <viewAttribute id="PRIMARYPHONENUMBER"/>
+      <viewAttribute id="SECONDARYPHONENUMBER"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute hidden="true" id="JOIN$PHONEID$PHONEID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTNAME" source="FIRSTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYID" source="COMPANYID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTID" source="DEPARTMENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIREDATE" source="HIREDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOBID" source="JOBID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PHONEID" source="PHONEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSID" source="ADDRESSID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUALIFICATIONID" source="QUALIFICATIONID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CC_SALARY" source="CC_SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTNAME" source="DEPARTMENTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ROLE" source="ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PHONEID$PHONEID" source="PHONEID"/>
+    </input>
+    <input node="Projection_6">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARYPHONENUMBER" source="PRIMARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SECONDARYPHONENUMBER" source="SECONDARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PHONEID$PHONEID" source="PHONEID"/>
+    </input>
+    <joinAttribute name="JOIN$PHONEID$PHONEID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2_2" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_2" multiJoinCentralTable="Join_1" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="EMPID" aggregationType="sum"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="COMPANYID" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENTID" aggregationType="sum"/>
+      <viewAttribute id="HIREDATE"/>
+      <viewAttribute id="JOBID" aggregationType="sum"/>
+      <viewAttribute id="PHONEID" aggregationType="sum"/>
+      <viewAttribute id="EMAIL"/>
+      <viewAttribute id="ADDRESSID" aggregationType="sum"/>
+      <viewAttribute id="QUALIFICATIONID" aggregationType="sum"/>
+      <viewAttribute id="CC_SALARY"/>
+      <viewAttribute id="DEPARTMENTNAME"/>
+      <viewAttribute id="ID" aggregationType="sum"/>
+      <viewAttribute id="HIGHESTDEGREE"/>
+      <viewAttribute id="FIELDOFSTUDY"/>
+      <viewAttribute id="PRIMARYPHONENUMBER"/>
+      <viewAttribute id="SECONDARYPHONENUMBER"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute hidden="true" id="JOIN$QUALIFICATIONID$ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_2_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTNAME" source="FIRSTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYID" source="COMPANYID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTID" source="DEPARTMENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIREDATE" source="HIREDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOBID" source="JOBID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PHONEID" source="PHONEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSID" source="ADDRESSID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUALIFICATIONID" source="QUALIFICATIONID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CC_SALARY" source="CC_SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTNAME" source="DEPARTMENTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARYPHONENUMBER" source="PRIMARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SECONDARYPHONENUMBER" source="SECONDARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ROLE" source="ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$QUALIFICATIONID$ID" source="QUALIFICATIONID"/>
+    </input>
+    <input node="Projection_5">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIGHESTDEGREE" source="HIGHESTDEGREE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIELDOFSTUDY" source="FIELDOFSTUDY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$QUALIFICATIONID$ID" source="ID"/>
+    </input>
+    <joinAttribute name="JOIN$QUALIFICATIONID$ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2_3" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_2" multiJoinCentralTable="Join_1" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="EMPID" aggregationType="sum"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="COMPANYID" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENTID" aggregationType="sum"/>
+      <viewAttribute id="HIREDATE"/>
+      <viewAttribute id="JOBID" aggregationType="sum"/>
+      <viewAttribute id="PHONEID" aggregationType="sum"/>
+      <viewAttribute id="EMAIL"/>
+      <viewAttribute id="ADDRESSID" aggregationType="sum"/>
+      <viewAttribute id="QUALIFICATIONID" aggregationType="sum"/>
+      <viewAttribute id="CC_SALARY"/>
+      <viewAttribute id="DEPARTMENTNAME"/>
+      <viewAttribute id="ID" aggregationType="sum"/>
+      <viewAttribute id="HIGHESTDEGREE"/>
+      <viewAttribute id="FIELDOFSTUDY"/>
+      <viewAttribute id="STREET"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="STATE"/>
+      <viewAttribute id="POSTALCODE" aggregationType="sum"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="PRIMARYPHONENUMBER"/>
+      <viewAttribute id="SECONDARYPHONENUMBER"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute hidden="true" id="JOIN$EMPID$EMPID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_2_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTNAME" source="FIRSTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYID" source="COMPANYID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTID" source="DEPARTMENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIREDATE" source="HIREDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOBID" source="JOBID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PHONEID" source="PHONEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSID" source="ADDRESSID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUALIFICATIONID" source="QUALIFICATIONID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CC_SALARY" source="CC_SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTNAME" source="DEPARTMENTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIGHESTDEGREE" source="HIGHESTDEGREE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIELDOFSTUDY" source="FIELDOFSTUDY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARYPHONENUMBER" source="PRIMARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SECONDARYPHONENUMBER" source="SECONDARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ROLE" source="ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$EMPID$EMPID" source="EMPID"/>
+    </input>
+    <input node="Projection_4">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STREET" source="STREET"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATE" source="STATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$EMPID$EMPID" source="EMPID"/>
+    </input>
+    <joinAttribute name="JOIN$EMPID$EMPID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2_4" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_2" multiJoinCentralTable="Join_1" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="EMPID" aggregationType="sum"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="COMPANYID" aggregationType="sum"/>
+      <viewAttribute id="DEPARTMENTID" aggregationType="sum"/>
+      <viewAttribute id="HIREDATE"/>
+      <viewAttribute id="JOBID" aggregationType="sum"/>
+      <viewAttribute id="PHONEID" aggregationType="sum"/>
+      <viewAttribute id="EMAIL"/>
+      <viewAttribute id="ADDRESSID" aggregationType="sum"/>
+      <viewAttribute id="QUALIFICATIONID" aggregationType="sum"/>
+      <viewAttribute id="CC_SALARY"/>
+      <viewAttribute id="DEPARTMENTNAME"/>
+      <viewAttribute id="ID" aggregationType="sum"/>
+      <viewAttribute id="HIGHESTDEGREE"/>
+      <viewAttribute id="FIELDOFSTUDY"/>
+      <viewAttribute id="STREET"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="STATE"/>
+      <viewAttribute id="POSTALCODE" aggregationType="sum"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="COMPANYNAME"/>
+      <viewAttribute id="PRIMARYPHONENUMBER"/>
+      <viewAttribute id="SECONDARYPHONENUMBER"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute hidden="true" id="JOIN$COMPANYID$COMPANYID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_2_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTNAME" source="FIRSTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYID" source="COMPANYID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTID" source="DEPARTMENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIREDATE" source="HIREDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOBID" source="JOBID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PHONEID" source="PHONEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ADDRESSID" source="ADDRESSID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUALIFICATIONID" source="QUALIFICATIONID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CC_SALARY" source="CC_SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTNAME" source="DEPARTMENTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIGHESTDEGREE" source="HIGHESTDEGREE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIELDOFSTUDY" source="FIELDOFSTUDY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STREET" source="STREET"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATE" source="STATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARYPHONENUMBER" source="PRIMARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SECONDARYPHONENUMBER" source="SECONDARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ROLE" source="ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COMPANYID$COMPANYID" source="COMPANYID"/>
+    </input>
+    <input node="Projection_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COMPANYID$COMPANYID" source="COMPANYID"/>
+    </input>
+    <joinAttribute name="JOIN$COMPANYID$COMPANYID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3_1" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_3" multiJoinCentralTable="Join_2" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="EMPID" aggregationType="sum"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="HIREDATE"/>
+      <viewAttribute id="EMAIL"/>
+      <viewAttribute id="CC_SALARY"/>
+      <viewAttribute id="DEPARTMENTNAME"/>
+      <viewAttribute id="HIGHESTDEGREE"/>
+      <viewAttribute id="FIELDOFSTUDY"/>
+      <viewAttribute id="STREET"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="STATE"/>
+      <viewAttribute id="POSTALCODE" aggregationType="sum"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="COMPANYNAME"/>
+      <viewAttribute id="EXPENSETYPE"/>
+      <viewAttribute id="DESCRIPTION"/>
+      <viewAttribute id="AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="RECEIPTNUMBER"/>
+      <viewAttribute id="APPROVALSTATUS"/>
+      <viewAttribute id="PRIMARYPHONENUMBER"/>
+      <viewAttribute id="SECONDARYPHONENUMBER"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute hidden="true" id="JOIN$EMPID$EMPID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_2_4">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTNAME" source="FIRSTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIREDATE" source="HIREDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CC_SALARY" source="CC_SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTNAME" source="DEPARTMENTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIGHESTDEGREE" source="HIGHESTDEGREE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIELDOFSTUDY" source="FIELDOFSTUDY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STREET" source="STREET"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATE" source="STATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARYPHONENUMBER" source="PRIMARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SECONDARYPHONENUMBER" source="SECONDARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ROLE" source="ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$EMPID$EMPID" source="EMPID"/>
+    </input>
+    <input node="DATA_EXPENSENS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXPENSETYPE" source="EXPENSETYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPTION" source="DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RECEIPTNUMBER" source="RECEIPTNUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="APPROVALSTATUS" source="APPROVALSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$EMPID$EMPID" source="EMPID"/>
+    </input>
+    <joinAttribute name="JOIN$EMPID$EMPID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3_2" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_3" multiJoinCentralTable="Join_2" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="EMPID" aggregationType="sum"/>
+      <viewAttribute id="FIRSTNAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="HIREDATE"/>
+      <viewAttribute id="EMAIL"/>
+      <viewAttribute id="CC_SALARY"/>
+      <viewAttribute id="DEPARTMENTNAME"/>
+      <viewAttribute id="HIGHESTDEGREE"/>
+      <viewAttribute id="FIELDOFSTUDY"/>
+      <viewAttribute id="STREET"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="STATE"/>
+      <viewAttribute id="POSTALCODE" aggregationType="sum"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="COMPANYNAME"/>
+      <viewAttribute id="EXPENSETYPE"/>
+      <viewAttribute id="DESCRIPTION"/>
+      <viewAttribute id="AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="RECEIPTNUMBER"/>
+      <viewAttribute id="APPROVALSTATUS"/>
+      <viewAttribute id="PRIMARYPHONENUMBER"/>
+      <viewAttribute id="SECONDARYPHONENUMBER"/>
+      <viewAttribute id="ROLE"/>
+      <viewAttribute id="ITEMNAME"/>
+      <viewAttribute id="QUANTITY" aggregationType="sum"/>
+      <viewAttribute id="PICKUPDATE"/>
+      <viewAttribute id="RETURNDATE"/>
+      <viewAttribute id="COSTTOCOMPANY" aggregationType="sum"/>
+      <viewAttribute id="COSTCATEGORY"/>
+      <viewAttribute hidden="true" id="JOIN$EMPID$EMPID"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="CC_ADDRESS" datatype="NVARCHAR" length="200" expressionLanguage="SQL">
+        <formula>&quot;STREET&quot; || ', ' || &quot;CITY&quot; || ', ' || &quot;STATE&quot; || '-' || &quot;POSTALCODE&quot; || ', ' || &quot;COUNTRY&quot;</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="Join_3_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTNAME" source="FIRSTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIREDATE" source="HIREDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CC_SALARY" source="CC_SALARY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPARTMENTNAME" source="DEPARTMENTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="HIGHESTDEGREE" source="HIGHESTDEGREE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIELDOFSTUDY" source="FIELDOFSTUDY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STREET" source="STREET"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATE" source="STATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="POSTALCODE" source="POSTALCODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPANYNAME" source="COMPANYNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EXPENSETYPE" source="EXPENSETYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPTION" source="DESCRIPTION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RECEIPTNUMBER" source="RECEIPTNUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="APPROVALSTATUS" source="APPROVALSTATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARYPHONENUMBER" source="PRIMARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SECONDARYPHONENUMBER" source="SECONDARYPHONENUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ROLE" source="ROLE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$EMPID$EMPID" source="EMPID"/>
+    </input>
+    <input node="DATA_LOGISTICS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ITEMNAME" source="ITEMNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PICKUPDATE" source="PICKUPDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RETURNDATE" source="RETURNDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COSTTOCOMPANY" source="COSTTOCOMPANY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COSTCATEGORY" source="COSTCATEGORY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$EMPID$EMPID" source="EMPID"/>
+    </input>
+    <joinAttribute name="JOIN$EMPID$EMPID"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_3_2">
+  <attributes>
+    <attribute id="FIRSTNAME" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FIRSTNAME"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="FIRSTNAME"/>
+    </attribute>
+    <attribute id="COMPANYNAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COMPANYNAME"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="COMPANYNAME"/>
+    </attribute>
+    <attribute id="HIREDATE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIREDATE"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="HIREDATE"/>
+    </attribute>
+    <attribute id="CC_SALARY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CC_SALARY"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="CC_SALARY"/>
+    </attribute>
+    <attribute id="EMAIL" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMAIL"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="EMAIL"/>
+    </attribute>
+    <attribute id="HIGHESTDEGREE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIGHESTDEGREE"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="HIGHESTDEGREE"/>
+    </attribute>
+    <attribute id="FIELDOFSTUDY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FIELDOFSTUDY"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="FIELDOFSTUDY"/>
+    </attribute>
+    <attribute id="DEPARTMENTNAME" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPARTMENTNAME"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="DEPARTMENTNAME"/>
+    </attribute>
+    <attribute id="EXPENSETYPE" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXPENSETYPE"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="EXPENSETYPE"/>
+    </attribute>
+    <attribute id="ITEMNAME" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ITEMNAME"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="ITEMNAME"/>
+    </attribute>
+    <attribute id="COSTCATEGORY" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COSTCATEGORY"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="COSTCATEGORY"/>
+    </attribute>
+  
+    <attribute id="CC_ADDRESS" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CC_ADDRESS"/>
+  
+      <keyMapping columnObjectName="Join_3_2" columnName="CC_ADDRESS"/>
+  
+    </attribute>
+  
+    <attribute id="APPROVALSTATUS_EXPENSES" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="APPROVALSTATUS"/>
+  
+      <keyMapping columnObjectName="Join_3_2" columnName="APPROVALSTATUS"/>
+  
+    </attribute>
+    <attribute id="LASTNAME" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LASTNAME"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="LASTNAME"/>
+    </attribute>
+    <attribute id="DESCRIPTION" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DESCRIPTION"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="DESCRIPTION"/>
+    </attribute>
+    <attribute id="RECEIPTNUMBER" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RECEIPTNUMBER"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="RECEIPTNUMBER"/>
+    </attribute>
+    <attribute id="APPROVALSTATUS_LOGISTICS" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="APPROVALSTATUS"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="APPROVALSTATUS"/>
+    </attribute>
+    <attribute id="PICKUPDATE" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PICKUPDATE"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="PICKUPDATE"/>
+    </attribute>
+    <attribute id="PRIMARYPHONENUMBER" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRIMARYPHONENUMBER"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="PRIMARYPHONENUMBER"/>
+    </attribute>
+    <attribute id="SECONDARYPHONENUMBER" order="23" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SECONDARYPHONENUMBER"/>
+      <keyMapping columnObjectName="Join_3_2" columnName="SECONDARYPHONENUMBER"/>
+    </attribute>
+  
+    <attribute id="EMP_ROLE" order="24" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ROLE"/>
+  
+      <keyMapping columnObjectName="Join_3_2" columnName="ROLE"/>
+  
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="QUANTITY" order="11" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="QUANTITY"/>
+      <measureMapping columnObjectName="Join_3_2" columnName="QUANTITY"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="COSTTOCOMPANY" order="13" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="COSTTOCOMPANY"/>
+      <measureMapping columnObjectName="Join_3_2" columnName="COSTTOCOMPANY"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  
+    <measure id="AMOUNT" order="18" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="AMOUNT"/>
+      <measureMapping columnObjectName="Join_3_2" columnName="AMOUNT"/>
+      <exceptionAggregationMetadata/>
+    </measure></baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+
+  <localDimensions/>
+
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="352" y="105"/>
+    
+      <rectangleSize width="165"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-212" y="849"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="147" y="849"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="131" y="542"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_4" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="401" y="542"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_5" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="674" y="542"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_6" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="896" y="542"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-83" y="518"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="180"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="192"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="377" y="351"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_3" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_2">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="172"/>
+    </shape>
+    <shape modelObjectName="Projection_4" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_2">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_5" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_2">
+      <upperLeftCorner x="920" y="30"/>
+      <rectangleSize width="181"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_2">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="192"/>
+    </shape>
+    <shape modelObjectName="Projection_6" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_2">
+      <upperLeftCorner x="1220" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="367" y="202"/>
+      <rectangleSize height="30" width="160"/>
+    </shape><shape><upperLeftCorner/><rectangleSize/></shape>
+    <shape modelObjectName="DATA_LOGISTICS" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_3">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="186"/>
+    </shape>
+    <shape modelObjectName="Join_2_4" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_3">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="250"/>
+    </shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape>
+    <shape modelObjectName="DATA_EXPENSENS" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_3">
+      <upperLeftCorner x="889" y="30"/>
+      <rectangleSize width="186"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>

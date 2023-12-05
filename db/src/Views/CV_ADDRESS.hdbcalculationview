@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_ADDRESS" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CV_ADDRESS.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DATA_ADDRESS">
+    <resourceUri>DATA_ADDRESS</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews/>
+<logicalModel id="DATA_ADDRESS">
+  <attributes>
+    <attribute id="STREET" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STREET"/>
+      <keyMapping columnObjectName="DATA_ADDRESS" columnName="STREET"/>
+    </attribute>
+    <attribute id="CITY" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="DATA_ADDRESS" columnName="CITY"/>
+    </attribute>
+    <attribute id="STATE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATE"/>
+      <keyMapping columnObjectName="DATA_ADDRESS" columnName="STATE"/>
+    </attribute>
+    <attribute id="COUNTRY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="DATA_ADDRESS" columnName="COUNTRY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="ID" order="1" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="ID"/>
+      <measureMapping columnObjectName="DATA_ADDRESS" columnName="ID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="EMPID" order="2" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="EMPID"/>
+      <measureMapping columnObjectName="DATA_ADDRESS" columnName="EMPID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="COMPANYID" order="3" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="COMPANYID"/>
+      <measureMapping columnObjectName="DATA_ADDRESS" columnName="COMPANYID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="POSTALCODE" order="7" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="POSTALCODE"/>
+      <measureMapping columnObjectName="DATA_ADDRESS" columnName="POSTALCODE"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

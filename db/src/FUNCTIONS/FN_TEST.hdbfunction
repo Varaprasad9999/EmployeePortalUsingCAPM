@@ -1,0 +1,80 @@
+FUNCTION "FN_TEST"()
+RETURNS TABLE(EMPID NVARCHAR(100), FIRSTNAME NVARCHAR(100), JOBTITLE NVARCHAR(100))
+LANGUAGE SQLSCRIPT 
+SQL SECURITY INVOKER AS
+BEGIN
+
+-- DECLARE temp TABLE(EMPID NVARCHAR(100), FIRSTNAME NVARCHAR(100));  -- Declaring not necessary and better, Increased speed.
+-- DECLARE temp2 TABLE(JOBID NVARCHAR(100), JOBTITLE NVARCHAR(100));
+DECLARE RESULT TABLE(EMPID NVARCHAR(100), FIRSTNAME NVARCHAR(100), JOBTITLE NVARCHAR(100));
+
+temp = SELECT EMPID, FIRSTNAME FROM "DATA_EMPLOYEE" WHERE EMPID IN (1,2);
+temp2 = SELECT * FROM "DATA_JOB";
+
+RESULT = SELECT t1.EMPID, t1.FIRSTNAME, t2.JOBTITLE FROM :temp t1 INNER JOIN :temp2 t2 ON t1.EMPID = t2.JOBID; 
+
+RETURN :RESULT;
+END;
+
+
+
+
+--     -- Declare variables to store the result
+--     DECLARE RESULTS TABLE(EMPID INTEGER, FIRSTNAME NVARCHAR(100));
+
+--     -- Execute a query and store the result in the variable
+--     SELECT EMPID, FIRSTNAME INTO RESULTS FROM "DATA_EMPLOYEE" LIMIT 2;
+
+--     -- Return the result
+-- RETURN SELECT EMPID, FIRSTNAME FROM RESULTS;
+
+-- FUNCTION "FN_TEST"()
+-- RETURNS TABLE(EMPID INTEGER, FIRSTNAME NVARCHAR(100))
+-- LANGUAGE SQLSCRIPT 
+-- SQL SECURITY INVOKER AS
+-- BEGIN
+--     -- Declare variables to store the result
+--     DECLARE EMPID_VAR INTEGER;
+--     DECLARE FIRSTNAME_VAR NVARCHAR(100);
+
+--     -- Declare a cursor
+--     DECLARE CURSOR CUR FOR SELECT EMPID, FIRSTNAME FROM EMPLOYEE;
+
+--     -- Open the cursor
+--     OPEN CUR;
+
+--     -- Fetch the first record
+--     FETCH CUR INTO EMPID_VAR, FIRSTNAME_VAR;
+
+--     -- Return the first record
+--     RETURN TABLE(:EMPID_VAR, :FIRSTNAME_VAR);
+
+--     -- Fetch the second record
+--     FETCH CUR INTO EMPID_VAR, FIRSTNAME_VAR;
+
+--     -- Return the second record
+--     RETURN TABLE (:EMPID_VAR, :FIRSTNAME_VAR);
+
+--     -- Move to the end of the cursor
+--     LAST CUR;
+
+--     -- Fetch the last record
+--     FETCH CUR INTO EMPID_VAR, FIRSTNAME_VAR;
+
+--     -- Return the last record
+--     RETURN TABLE (:EMPID_VAR, :FIRSTNAME_VAR);
+
+--     -- Move to the second-to-last record
+--     PRIOR CUR;
+
+--     -- Fetch the second-to-last record
+--     FETCH CUR INTO EMPID_VAR, FIRSTNAME_VAR;
+
+--     -- Return the second-to-last record
+--     RETURN TABLE (:EMPID_VAR, :FIRSTNAME_VAR);
+
+--     -- Close the cursor
+--     CLOSE CUR;
+-- END;
+
+-- 

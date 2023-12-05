@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_AP" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CV_AP.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DATA_EMPLOYEE">
+    <resourceUri>DATA_EMPLOYEE</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews/>
+<logicalModel id="DATA_EMPLOYEE">
+  <attributes>
+    <attribute id="FIRSTNAME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FIRSTNAME"/>
+      <keyMapping columnObjectName="DATA_EMPLOYEE" columnName="FIRSTNAME"/>
+    </attribute>
+    <attribute id="LASTNAME" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LASTNAME"/>
+      <keyMapping columnObjectName="DATA_EMPLOYEE" columnName="LASTNAME"/>
+    </attribute>
+    <attribute id="DATEOFBIRTH" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATEOFBIRTH"/>
+      <keyMapping columnObjectName="DATA_EMPLOYEE" columnName="DATEOFBIRTH"/>
+    </attribute>
+    <attribute id="GENDER" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="GENDER"/>
+      <keyMapping columnObjectName="DATA_EMPLOYEE" columnName="GENDER"/>
+    </attribute>
+    <attribute id="HIREDATE" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HIREDATE"/>
+      <keyMapping columnObjectName="DATA_EMPLOYEE" columnName="HIREDATE"/>
+    </attribute>
+    <attribute id="EMAIL" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMAIL"/>
+      <keyMapping columnObjectName="DATA_EMPLOYEE" columnName="EMAIL"/>
+    </attribute>
+    <attribute id="ROLE" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ROLE"/>
+      <keyMapping columnObjectName="DATA_EMPLOYEE" columnName="ROLE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="EMPID" order="1" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="EMPID"/>
+      <measureMapping columnObjectName="DATA_EMPLOYEE" columnName="EMPID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="COMPANYID" order="2" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="COMPANYID"/>
+      <measureMapping columnObjectName="DATA_EMPLOYEE" columnName="COMPANYID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="DEPARTMENTID" order="7" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="DEPARTMENTID"/>
+      <measureMapping columnObjectName="DATA_EMPLOYEE" columnName="DEPARTMENTID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="JOBID" order="8" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="JOBID"/>
+      <measureMapping columnObjectName="DATA_EMPLOYEE" columnName="JOBID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="SALARY" order="9" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="SALARY"/>
+      <measureMapping columnObjectName="DATA_EMPLOYEE" columnName="SALARY"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="PHONEID" order="12" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="PHONEID"/>
+      <measureMapping columnObjectName="DATA_EMPLOYEE" columnName="PHONEID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="ADDRESSID" order="13" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="ADDRESSID"/>
+      <measureMapping columnObjectName="DATA_EMPLOYEE" columnName="ADDRESSID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="QUALIFICATIONID" order="14" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="QUALIFICATIONID"/>
+      <measureMapping columnObjectName="DATA_EMPLOYEE" columnName="QUALIFICATIONID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="CV_LEAVES" applyPrivilegeType="NONE" dataCategory="DIMENSION" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CV_LEAVES.hdbcalculationview"/>
+<localVariables>
+  <variable id="STARTDATE" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties mandatory="false" defaultValue="" datatype="DATE" length="10" scale="null">
+      <valueDomain type="empty"/>
+      <selection multiLine="false" type="SingleValue"/>
+      <derivationRule>
+        <resourceUri>DATA_LEAVES</resourceUri>
+        <resultElementName>STARTDATE</resultElementName>
+      </derivationRule>
+    </variableProperties>
+  </variable>
+  <variable id="END_DATE" parameter="true">
+    <descriptions defaultDescription=""/>
+    <variableProperties datatype="DATE" length="10" scale="NaN" mandatory="false" defaultValue="">
+      <valueDomain type="empty"/>
+      <selection multiLine="false" type="SingleValue"/>
+      <derivationRule>
+        <resourceUri>DATA_LEAVES</resourceUri>
+        <resultElementName>ENDDATE</resultElementName>
+      </derivationRule>
+    </variableProperties>
+  </variable></localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DATA_LEAVES">
+    <resourceUri>DATA_LEAVES</resourceUri>
+  </DataSource>
+  <DataSource id="FN_FINAL_NON_WEEK" type="TABLE_FUNCTION">
+    <resourceUri>FN_FINAL_NON_WEEK</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ENDDATE"/>
+      <viewAttribute id="STARTDATE"/>
+      <viewAttribute id="REASON"/>
+      <viewAttribute id="STATUS"/>
+      <viewAttribute id="APPLIEDDATE"/>
+      <viewAttribute id="FIRSTDAYHALFDAY"/>
+      <viewAttribute id="ENDDAYHALFDAY"/>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="EMPID"/>
+      <viewAttribute id="COUNTOFDAYS"/>
+      <viewAttribute id="FRISTDAYAM"/>
+      <viewAttribute id="ENDDAYAM"/>
+      <viewAttribute id="NONWEEKDAYS"/>
+      <viewAttribute hidden="true" id="JOIN$STARTDATE$STARTDATE"/>
+      <viewAttribute hidden="true" id="JOIN$ENDDATE$ENDDATE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="DATA_LEAVES">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ENDDATE" source="ENDDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STARTDATE" source="STARTDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REASON" source="REASON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="APPLIEDDATE" source="APPLIEDDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRSTDAYHALFDAY" source="FIRSTDAYHALFDAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ENDDAYHALFDAY" source="ENDDAYHALFDAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPID" source="EMPID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTOFDAYS" source="COUNTOFDAYS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FRISTDAYAM" source="FRISTDAYAM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ENDDAYAM" source="ENDDAYAM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$STARTDATE$STARTDATE" source="STARTDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ENDDATE$ENDDATE" source="ENDDATE"/>
+    </input>
+    <input node="FN_FINAL_NON_WEEK">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NONWEEKDAYS" source="NONWEEKDAYS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$STARTDATE$STARTDATE" source="STARTDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ENDDATE$ENDDATE" source="ENDDATE"/>
+    </input>
+    <joinAttribute name="JOIN$STARTDATE$STARTDATE"/>
+    <joinAttribute name="JOIN$ENDDATE$ENDDATE"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="ENDDATE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ENDDATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="ENDDATE"/>
+    </attribute>
+    <attribute id="STARTDATE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STARTDATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="STARTDATE"/>
+    </attribute>
+    <attribute id="REASON" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REASON"/>
+      <keyMapping columnObjectName="Join_1" columnName="REASON"/>
+    </attribute>
+    <attribute id="STATUS" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATUS"/>
+      <keyMapping columnObjectName="Join_1" columnName="STATUS"/>
+    </attribute>
+    <attribute id="APPLIEDDATE" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="APPLIEDDATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="APPLIEDDATE"/>
+    </attribute>
+    <attribute id="FIRSTDAYHALFDAY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FIRSTDAYHALFDAY"/>
+      <keyMapping columnObjectName="Join_1" columnName="FIRSTDAYHALFDAY"/>
+    </attribute>
+    <attribute id="ENDDAYHALFDAY" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ENDDAYHALFDAY"/>
+      <keyMapping columnObjectName="Join_1" columnName="ENDDAYHALFDAY"/>
+    </attribute>
+    <attribute id="ID" order="10">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="ID"/>
+    </attribute>
+    <attribute id="EMPID" order="11">
+      <descriptions defaultDescription="EMPID"/>
+      <keyMapping columnObjectName="Join_1" columnName="EMPID"/>
+    </attribute>
+    <attribute id="COUNTOFDAYS" order="12">
+      <descriptions defaultDescription="COUNTOFDAYS"/>
+      <keyMapping columnObjectName="Join_1" columnName="COUNTOFDAYS"/>
+    </attribute>
+    <attribute id="FRISTDAYAM" order="13">
+      <descriptions defaultDescription="FRISTDAYAM"/>
+      <keyMapping columnObjectName="Join_1" columnName="FRISTDAYAM"/>
+    </attribute>
+    <attribute id="ENDDAYAM" order="14">
+      <descriptions defaultDescription="ENDDAYAM"/>
+      <keyMapping columnObjectName="Join_1" columnName="ENDDAYAM"/>
+    </attribute>
+    <attribute id="NONWEEKDAYS" order="15">
+      <descriptions defaultDescription="NONWEEKDAYS"/>
+      <keyMapping columnObjectName="Join_1" columnName="NONWEEKDAYS"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="HALFDAYDESCRIPTION" order="1" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="NVARCHAR" expressionLanguage="SQL" length="100">
+        <formula>(CASE
+ WHEN (&quot;FIRSTDAYHALFDAY&quot; = true and &quot;FRISTDAYAM&quot; = 0 and &quot;ENDDAYHALFDAY&quot; = true and &quot;ENDDAYAM&quot; = 0) THEN 'Leave taken on firstDay forenoon session and LastDay forenoon session.'
+ WHEN (&quot;FIRSTDAYHALFDAY&quot; = true and &quot;FRISTDAYAM&quot; = 0 and &quot;ENDDAYHALFDAY&quot; = true and &quot;ENDDAYAM&quot; = 1) THEN 'Leave taken on firstDay forenoon session and LastDay afternoon session.'
+ WHEN (&quot;FIRSTDAYHALFDAY&quot; = true and &quot;FRISTDAYAM&quot; = 1 and &quot;ENDDAYHALFDAY&quot; = true and &quot;ENDDAYAM&quot; = 0) THEN 'Leave taken on firstDay afternoon session and LastDay forenoon session.'
+ WHEN (&quot;FIRSTDAYHALFDAY&quot; = true and &quot;FRISTDAYAM&quot; = 1 and &quot;ENDDAYHALFDAY&quot; = true and &quot;ENDDAYAM&quot; = 1) THEN 'Leave taken on firstDay afternoon session and LastDay afternoon session.'
+ WHEN (&quot;FIRSTDAYHALFDAY&quot; = true and &quot;FRISTDAYAM&quot; = 0) THEN 'Leave taken on firstDay forenoon session.'
+ WHEN (&quot;FIRSTDAYHALFDAY&quot; = true and &quot;FRISTDAYAM&quot; = 1) THEN 'Leave taken on firstDay afternoon session'
+ WHEN (&quot;ENDDAYHALFDAY&quot; = true and &quot;ENDDAYAM&quot; = 0) THEN 'Leave taken on lastDay forenoon session'
+ WHEN (&quot;ENDDAYHALFDAY&quot; = true and &quot;ENDDAYAM&quot; = 1) THEN 'Leave taken on lastDay afternoon session'
+ ELSE 'No Half Day taken'
+END)
+
+</formula>
+      </keyCalculation>
+      </calculatedAttribute>
+  
+    <calculatedAttribute id="CV_DAYSCOUNT" order="2" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+  
+      <keyCalculation datatype="DECIMAL" expressionLanguage="SQL" length="15" scale="1">
+  
+        <formula>
+(DAYS_BETWEEN(&quot;STARTDATE&quot;, &quot;ENDDATE&quot;) + 1)  -
+    (CASE
+        WHEN &quot;FIRSTDAYHALFDAY&quot; = true THEN
+            CASE
+                WHEN &quot;ENDDAYHALFDAY&quot; = true THEN 1
+                ELSE 0.5
+            END
+        ELSE
+            CASE
+                WHEN &quot;ENDDAYHALFDAY&quot; = true THEN 0.5
+                ELSE 0
+            END
+    END)</formula>
+  
+      </keyCalculation>
+  
+      </calculatedAttribute>
+  
+    <calculatedAttribute id="CV_FINAL_COUNT" order="16" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="DECIMAL" expressionLanguage="COLUMN_ENGINE" length="15" scale="1">
+        <formula>&quot;CV_DAYSCOUNT&quot;-&quot;NONWEEKDAYS&quot;</formula>
+      </keyCalculation>
+      </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/></logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="91" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="198"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape modelObjectName="DATA_LEAVES" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="189"/>
+    </shape>
+    <shape modelObjectName="FN_FINAL_NON_WEEK" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="920" y="30"/>
+      <rectangleSize width="198"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

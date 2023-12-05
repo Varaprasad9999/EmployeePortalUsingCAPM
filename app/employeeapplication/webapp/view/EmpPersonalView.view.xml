@@ -1,0 +1,214 @@
+<mvc:View
+    controllerName="com.amista.employeeapplication.controller.EmpPersonalView"
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns:viz="sap.viz.ui5.controls" 
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data" 
+    displayBlock="true"
+>
+    <m:Page showNavButton="true" navButtonPress="onPressBackButton" title="{i18n>title2}">
+
+<!-- <viz:VizFrame  id="idDonutChart" vizType="donut" width="40%" height="40%"
+						vizProperties="{plotArea: { drawingEffect: 'glossy' },title:{ text:'Leave Analytics of Employee'}}">
+						<viz:dataset>
+							<viz.data:FlattenedDataset data="{LEAVES}">
+								<viz.data:dimensions>
+									<viz.data:DimensionDefinition name="Reason" value="{REASON}" />
+								</viz.data:dimensions>
+								<viz.data:measures>
+									<viz.data:MeasureDefinition name="Count" value="{COUNTOFDAYS}"/>
+								</viz.data:measures>
+							</viz.data:FlattenedDataset>
+						</viz:dataset>
+						<viz:feeds>
+							<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+							<viz.feeds:FeedItem uid="color" type="Dimension" values="Reason"/>
+						</viz:feeds>
+					</viz:VizFrame> -->
+
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        showEditHeaderButton="true"
+        editHeaderButtonPress="handleEditBtnPress"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <!-- <breadcrumbs>
+                    <m:Breadcrumbs
+                        id="breadcrumbsId"
+                        currentLocationText="Object Page Example"
+                    >
+                        <m:Link
+                            text="Page 1 a very long link"
+                            press="handleLink1Press"
+                        />
+                        <m:Link
+                            text="Page 2 long link"
+                            press="handleLink2Press"
+                        />
+                    </m:Breadcrumbs>
+                </breadcrumbs> -->
+
+                <expandedHeading>
+                    <m:HBox>
+                        <m:Title
+                            text="{FIRSTNAME} {LASTNAME}"
+                            wrapping="true"
+                        />
+                        <m:ObjectMarker
+                            type="Favorite"
+                            class="sapUiTinyMarginBegin"
+                        />
+                    </m:HBox>
+                </expandedHeading>
+
+                <snappedHeading>
+                    <m:FlexBox
+                        fitContainer="true"
+                        alignItems="Center"
+                    >
+                        <!-- <m:Avatar
+                            src="/formal.png"
+                            class="sapUiTinyMarginEnd"
+                        /> -->
+                        <m:Image src="./formal.png" width="60px" height="60px" class="image" />
+                        <m:Title
+                            text="{FIRSTNAME} {LASTNAME}"
+                            wrapping="true"
+                        />
+                    </m:FlexBox>
+                </snappedHeading>
+
+                <expandedContent>
+                    <m:Text text="{JOBTITLE}" />
+                </expandedContent>
+
+                <snappedContent>
+                    <m:Text text="{JOBTITLE}" />
+                </snappedContent>
+
+                <snappedTitleOnMobile>
+                    <m:Title text="{JOBTITLE}" />
+                </snappedTitleOnMobile>
+
+                <actions>
+                    <m:OverflowToolbarButton
+                        icon="sap-icon://edit"
+                        text="edit header"
+                        type="Emphasized"
+                        tooltip="edit"
+                    >
+                        <m:layoutData>
+                            <m:OverflowToolbarLayoutData
+                                priority="NeverOverflow"
+                            />
+                        </m:layoutData>
+                    </m:OverflowToolbarButton>
+                    <m:OverflowToolbarButton
+                        icon="sap-icon://pull-down"
+                        text="show section"
+                        type="Emphasized"
+                        tooltip="pull-down"
+                    />
+                    <m:OverflowToolbarButton
+                        icon="sap-icon://show"
+                        text="show state"
+                        tooltip="show"
+                    />
+                    <m:Button
+                        text="Toggle Footer"
+                        press="toggleFooter"
+                    />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox wrap="Wrap">
+                <m:Image src="./formal.png" width="60px" height="60px" class="image" />
+
+                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                    <m:Link text="{PRIMARYPHONENUMBER}" />
+                    <m:Link text="{EMAIL}" />
+                </layout:VerticalLayout>
+
+                <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+                    <m:Image
+                        src="./test-resources/sap/uxap/images/linkedin.png"
+                    />
+                    <m:Image
+                        src="./test-resources/sap/uxap/images/Twitter.png"
+                        class="sapUiSmallMarginBegin"
+                    />
+                </layout:HorizontalLayout>
+
+                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                    <m:Label
+                        text="Hello! I am {FIRSTNAME} and I use some extraordinary tools to do my work as a {JOBTITLE}"
+                    />
+
+                      <!-- <m:VBox id="trailOne">
+
+                        <m:Text text="Hi there!!"></m:Text>
+                        <m:Text text="Hello there I am your {FIRSTNAME}"></m:Text>
+                        <m:Text text="{EMPID}"></m:Text>
+                        <m:Table items="{LEAVES}">
+                        <m:columns>
+                            <m:Column >
+                                <m:Text text="STARTDATEs"></m:Text>
+                            </m:Column>
+                        </m:columns>
+                        <m:items>
+                            <m:ColumnListItem >
+                                <m:cells>
+                                    <m:Text text="{STARTDATE}"></m:Text>
+                                </m:cells>
+                            </m:ColumnListItem>
+                        </m:items>
+                        </m:Table>
+                        <m:Text text="It ends here!!"></m:Text>
+                </m:VBox> -->
+                    
+                    <m:VBox>
+                        <m:Label text="Achieved goals" width="200px" design="Bold"/>
+                        <m:ProgressIndicator
+                            percentValue="70"
+                            displayValue="70%"
+                        />
+                    </m:VBox>
+
+                    
+
+                </layout:VerticalLayout>
+
+                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                    <m:Label
+                        text="{STREET}, {CITY}, {STATE} - {POSTALCODE}, {COUNTRY}"
+                    />
+                </layout:VerticalLayout>
+            </m:FlexBox>
+        </headerContent>
+
+        <sections>
+            
+                
+<core:Fragment fragmentName = "com.amista.employeeapplication.Fragments.goalsPlan" type="XML" />
+                
+                <core:Fragment fragmentName = "com.amista.employeeapplication.Fragments.personal" type="XML" />
+                
+
+                <core:Fragment fragmentName = "com.amista.employeeapplication.Fragments.employment" type="XML" />
+
+                
+            
+        </sections>
+    </ObjectPageLayout>
+    </m:Page>
+</mvc:View>

@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="DetailsEmployeeServices" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="EMPLOYEE" EntityType="DetailsEmployeeServices.EMPLOYEE"/>
+                <EntitySet Name="ADDRESS" EntityType="DetailsEmployeeServices.ADDRESS"/>
+                <EntitySet Name="COMPANY" EntityType="DetailsEmployeeServices.COMPANY"/>
+                <EntitySet Name="DEPARTMENT" EntityType="DetailsEmployeeServices.DEPARTMENT"/>
+                <EntitySet Name="EXPENSES" EntityType="DetailsEmployeeServices.EXPENSES"/>
+                <EntitySet Name="LEAVES" EntityType="DetailsEmployeeServices.LEAVES"/>
+                <EntitySet Name="PAYSLIPS" EntityType="DetailsEmployeeServices.PAYSLIPS"/>
+                <EntitySet Name="PHONE" EntityType="DetailsEmployeeServices.PHONE"/>
+                <EntitySet Name="EmployeeDetailsAP" EntityType="DetailsEmployeeServices.EmployeeDetailsAP"/>
+                <EntitySet Name="EmployeeFunction" EntityType="DetailsEmployeeServices.EmployeeFunction"/>
+                <EntitySet Name="InputEmployee" EntityType="DetailsEmployeeServices.InputEmployee"/>
+                <EntitySet Name="EmployeeCountGroupBy" EntityType="DetailsEmployeeServices.EmployeeCountGroupBy"/>
+                <EntitySet Name="EmployeeTrail" EntityType="DetailsEmployeeServices.EmployeeTrail"/>
+                <EntitySet Name="CompanyE" EntityType="DetailsEmployeeServices.CompanyE"/>
+                <EntitySet Name="CompanyWithRestrict" EntityType="DetailsEmployeeServices.CompanyWithRestrict"/>
+                <EntitySet Name="AddressE" EntityType="DetailsEmployeeServices.AddressE"/>
+                <EntitySet Name="QualificationE" EntityType="DetailsEmployeeServices.QualificationE"/>
+                <EntitySet Name="ExpensesE" EntityType="DetailsEmployeeServices.ExpensesE"/>
+                <EntitySet Name="LogisticsE" EntityType="DetailsEmployeeServices.LogisticsE"/>
+                <EntitySet Name="PhoneE" EntityType="DetailsEmployeeServices.PhoneE"/>
+                <EntitySet Name="DepartmentE" EntityType="DetailsEmployeeServices.DepartmentE"/>
+                <EntitySet Name="LeavesE" EntityType="DetailsEmployeeServices.LeavesE"/>
+                <EntitySet Name="PayslipsE" EntityType="DetailsEmployeeServices.PayslipsE"/>
+                <EntitySet Name="BasicEmployeeDetails" EntityType="DetailsEmployeeServices.BasicEmployeeDetails"/>
+                <FunctionImport Name="EmployeeFunc" Function="DetailsEmployeeServices.EmployeeFunc"/>
+            </EntityContainer>
+            <EntityType Name="EMPLOYEE">
+                <Key>
+                    <PropertyRef Name="FIRSTNAME"/>
+                    <PropertyRef Name="LASTNAME"/>
+                    <PropertyRef Name="DATEOFBIRTH"/>
+                    <PropertyRef Name="EMAIL"/>
+                </Key>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="FIRSTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="LASTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DATEOFBIRTH" Type="Edm.Date" Nullable="false"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="250" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="ADDRESS">
+                <Key>
+                    <PropertyRef Name="STREET"/>
+                    <PropertyRef Name="CITY"/>
+                    <PropertyRef Name="STATE"/>
+                    <PropertyRef Name="COUNTRY"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="COMPANYID" Type="Edm.Int32"/>
+                <Property Name="STREET" Type="Edm.String" MaxLength="200" Nullable="false"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="STATE" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="POSTALCODE" Type="Edm.Int32"/>
+                <Property Name="COUNTRY" Type="Edm.String" MaxLength="100" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="COMPANY">
+                <Key>
+                    <PropertyRef Name="COMPANYNAME"/>
+                </Key>
+                <Property Name="COMPANYID" Type="Edm.Int32"/>
+                <Property Name="COMPANYNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="ADDRESSID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="DEPARTMENT">
+                <Key>
+                    <PropertyRef Name="DEPARTMENTNAME"/>
+                </Key>
+                <Property Name="DEPARTMENTID" Type="Edm.Int32"/>
+                <Property Name="DEPARTMENTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DEPARTMENTMANAGERID" Type="Edm.Int32"/>
+                <Property Name="BUDGET" Type="Edm.Decimal" Precision="10"/>
+            </EntityType>
+            <EntityType Name="EXPENSES">
+                <Key>
+                    <PropertyRef Name="EXPENSEDATE"/>
+                    <PropertyRef Name="EXPENSETYPE"/>
+                    <PropertyRef Name="DESCRIPTION"/>
+                    <PropertyRef Name="RECEIPTNUMBER"/>
+                    <PropertyRef Name="APPROVALSTATUS"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="EXPENSEDATE" Type="Edm.Date" Nullable="false"/>
+                <Property Name="EXPENSETYPE" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="500" Nullable="false"/>
+                <Property Name="AMOUNT" Type="Edm.Decimal" Precision="8"/>
+                <Property Name="RECEIPTNUMBER" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="APPROVALSTATUS" Type="Edm.String" MaxLength="50" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="LEAVES">
+                <Key>
+                    <PropertyRef Name="STARTDATE"/>
+                    <PropertyRef Name="ENDDATE"/>
+                    <PropertyRef Name="REASON"/>
+                    <PropertyRef Name="STATUS"/>
+                    <PropertyRef Name="APPLIEDDATE"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="STARTDATE" Type="Edm.Date" Nullable="false"/>
+                <Property Name="ENDDATE" Type="Edm.Date" Nullable="false"/>
+                <Property Name="REASON" Type="Edm.String" MaxLength="500" Nullable="false"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="APPLIEDDATE" Type="Edm.Date" Nullable="false"/>
+                <Property Name="COUNTOFDAYS" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="PAYSLIPS">
+                <Key>
+                    <PropertyRef Name="PAYSLIPDATE"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="PAYSLIPDATE" Type="Edm.Date" Nullable="false"/>
+                <Property Name="SALARY" Type="Edm.Decimal" Precision="10"/>
+                <Property Name="OVERTIMEPAY" Type="Edm.Decimal" Precision="6"/>
+                <Property Name="BONUS" Type="Edm.Decimal" Precision="6"/>
+                <Property Name="DEDUCTIONS" Type="Edm.Decimal" Precision="6"/>
+                <Property Name="TAX" Type="Edm.Decimal" Precision="6"/>
+                <Property Name="NETPAY" Type="Edm.Decimal" Precision="10"/>
+            </EntityType>
+            <EntityType Name="PHONE">
+                <Key>
+                    <PropertyRef Name="COUNTRYCODE"/>
+                    <PropertyRef Name="PRIMARYPHONENUMBER"/>
+                    <PropertyRef Name="SECONDARYPHONENUMBER"/>
+                </Key>
+                <Property Name="PHONEID" Type="Edm.Int32"/>
+                <Property Name="COUNTRYCODE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="PRIMARYPHONENUMBER" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="SECONDARYPHONENUMBER" Type="Edm.String" MaxLength="10" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="EmployeeDetailsAP">
+                <Key>
+                    <PropertyRef Name="FIRSTNAME"/>
+                    <PropertyRef Name="LASTNAME"/>
+                    <PropertyRef Name="DATEOFBIRTH"/>
+                    <PropertyRef Name="GENDER"/>
+                    <PropertyRef Name="HIREDATE"/>
+                    <PropertyRef Name="EMAIL"/>
+                    <PropertyRef Name="ROLE"/>
+                </Key>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="COMPANYID" Type="Edm.Int32"/>
+                <Property Name="FIRSTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="LASTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DATEOFBIRTH" Type="Edm.Date" Nullable="false"/>
+                <Property Name="GENDER" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DEPARTMENTID" Type="Edm.Int32"/>
+                <Property Name="JOBID" Type="Edm.Int32"/>
+                <Property Name="SALARY" Type="Edm.Decimal" Precision="15"/>
+                <Property Name="HIREDATE" Type="Edm.Date" Nullable="false"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="250" Nullable="false"/>
+                <Property Name="PHONEID" Type="Edm.Int32"/>
+                <Property Name="ADDRESSID" Type="Edm.Int32"/>
+                <Property Name="QUALIFICATIONID" Type="Edm.Int32"/>
+                <Property Name="ROLE" Type="Edm.String" MaxLength="100" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="EmployeeFunction">
+                <Key>
+                    <PropertyRef Name="FIRSTNAME"/>
+                    <PropertyRef Name="LASTNAME"/>
+                    <PropertyRef Name="DEPARTMENTNAME"/>
+                </Key>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="FIRSTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="LASTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DEPARTMENT_BUDGET" Type="Edm.Int32"/>
+                <Property Name="DEPARTMENTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="InputEmployee">
+                <Key>
+                    <PropertyRef Name="FIRSTNAME"/>
+                </Key>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="FIRSTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="EmployeeCountGroupBy">
+                <Key>
+                    <PropertyRef Name="DEPARTMENTNAME"/>
+                </Key>
+                <Property Name="DEPARTMENTNAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="EMPLOYEE_COUNT" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="EmployeeTrail">
+                <Key>
+                    <PropertyRef Name="EMPID"/>
+                </Key>
+                <Property Name="EMPID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="COMPANYID" Type="Edm.Int32"/>
+                <Property Name="DEPARTMENTID" Type="Edm.Int32"/>
+                <Property Name="JOBID" Type="Edm.Int32"/>
+                <Property Name="PHONEID" Type="Edm.Int32"/>
+                <Property Name="ADDRESSID" Type="Edm.Int32"/>
+                <Property Name="QUALIFICATIONID" Type="Edm.Int32"/>
+                <Property Name="ROLE" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="CompanyE">
+                <Key>
+                    <PropertyRef Name="COMPANYID"/>
+                </Key>
+                <Property Name="COMPANYID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="COMPANYNAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ADDRESSID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="CompanyWithRestrict">
+                <Key>
+                    <PropertyRef Name="COMPANYID"/>
+                </Key>
+                <Property Name="COMPANYID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="COMPANYNAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ADDRESSID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="AddressE">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="COMPANYID" Type="Edm.Int32"/>
+                <Property Name="STREET" Type="Edm.String" MaxLength="200"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="STATE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="POSTALCODE" Type="Edm.Int32"/>
+                <Property Name="COUNTRY" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="QualificationE">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="HIGHESTDEGREE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="COLLEGE" Type="Edm.String" MaxLength="200"/>
+                <Property Name="PERCENTAGE" Type="Edm.Decimal" Scale="2" Precision="4"/>
+                <Property Name="YEAREARNED" Type="Edm.Int32"/>
+                <Property Name="FIELDOFSTUDY" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="ExpensesE">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="EXPENSEDATE" Type="Edm.Date"/>
+                <Property Name="EXPENSETYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="500"/>
+                <Property Name="AMOUNT" Type="Edm.Decimal" Scale="2" Precision="8"/>
+                <Property Name="RECEIPTNUMBER" Type="Edm.String" MaxLength="100"/>
+                <Property Name="APPROVALSTATUS" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="LogisticsE">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="ITEMNAME" Type="Edm.String" MaxLength="200"/>
+                <Property Name="QUANTITY" Type="Edm.Int32"/>
+                <Property Name="PICKUPDATE" Type="Edm.Date"/>
+                <Property Name="RETURNDATE" Type="Edm.Date"/>
+                <Property Name="COSTTOCOMPANY" Type="Edm.Decimal" Scale="2" Precision="8"/>
+                <Property Name="COSTCATEGORY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="APPROVALSTATUS" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="PhoneE">
+                <Key>
+                    <PropertyRef Name="PHONEID"/>
+                </Key>
+                <Property Name="PHONEID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="COUNTRYCODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PRIMARYPHONENUMBER" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SECONDARYPHONENUMBER" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="DepartmentE">
+                <Key>
+                    <PropertyRef Name="DEPARTMENTID"/>
+                </Key>
+                <Property Name="DEPARTMENTID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DEPARTMENTNAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="DEPARTMENTMANAGERID" Type="Edm.Int32"/>
+                <Property Name="BUDGET" Type="Edm.Decimal" Scale="2" Precision="10"/>
+            </EntityType>
+            <EntityType Name="LeavesE">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="STARTDATE" Type="Edm.Date"/>
+                <Property Name="ENDDATE" Type="Edm.Date"/>
+                <Property Name="REASON" Type="Edm.String" MaxLength="500"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="50"/>
+                <Property Name="APPLIEDDATE" Type="Edm.Date"/>
+                <Property Name="COUNTOFDAYS" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="PayslipsE">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EMPID" Type="Edm.Int32"/>
+                <Property Name="PAYSLIPDATE" Type="Edm.Date"/>
+                <Property Name="SALARY" Type="Edm.Decimal" Scale="2" Precision="10"/>
+                <Property Name="OVERTIMEPAY" Type="Edm.Decimal" Scale="2" Precision="6"/>
+                <Property Name="BONUS" Type="Edm.Decimal" Scale="2" Precision="6"/>
+                <Property Name="DEDUCTIONS" Type="Edm.Decimal" Scale="2" Precision="6"/>
+                <Property Name="TAX" Type="Edm.Decimal" Scale="2" Precision="6"/>
+                <Property Name="NETPAY" Type="Edm.Decimal" Scale="2" Precision="10"/>
+            </EntityType>
+            <EntityType Name="BasicEmployeeDetails">
+                <Property Name="EmployeeId" Type="Edm.Int32"/>
+                <Property Name="EmployeeName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="Gender" Type="Edm.String" MaxLength="10"/>
+                <Property Name="JobTitle" Type="Edm.String" MaxLength="100"/>
+                <Property Name="DepartmentName" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <Function Name="EmployeeFunc" IsBound="false" IsComposable="false">
+                <Parameter Name="EMPID" Type="Edm.Int32"/>
+                <Parameter Name="FIRSTNAME" Type="Edm.String"/>
+                <Parameter Name="LASTNAME" Type="Edm.String"/>
+                <Parameter Name="EMAIL" Type="Edm.String"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Annotations Target="DetailsEmployeeServices.EMPLOYEE/EMPID">
+                <Annotation Term="Common.Label" String="EMPID: EMPID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EMPLOYEE/FIRSTNAME">
+                <Annotation Term="Common.Label" String="FIRSTNAME: FIRSTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EMPLOYEE/LASTNAME">
+                <Annotation Term="Common.Label" String="LASTNAME: LASTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EMPLOYEE/DATEOFBIRTH">
+                <Annotation Term="Common.Label" String="DATEOFBIRTH: DATEOFBIRTH"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EMPLOYEE/EMAIL">
+                <Annotation Term="Common.Label" String="EMAIL: EMAIL"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.ADDRESS/ID">
+                <Annotation Term="Common.Label" String="ID: ID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.ADDRESS/EMPID">
+                <Annotation Term="Common.Label" String="EMPID: EMPID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.ADDRESS/COMPANYID">
+                <Annotation Term="Common.Label" String="COMPANYID: COMPANYID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.ADDRESS/STREET">
+                <Annotation Term="Common.Label" String="STREET: STREET"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.ADDRESS/CITY">
+                <Annotation Term="Common.Label" String="CITY: CITY"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.ADDRESS/STATE">
+                <Annotation Term="Common.Label" String="STATE: STATE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.ADDRESS/POSTALCODE">
+                <Annotation Term="Common.Label" String="POSTALCODE: POSTALCODE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.ADDRESS/COUNTRY">
+                <Annotation Term="Common.Label" String="COUNTRY: COUNTRY"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.COMPANY/COMPANYID">
+                <Annotation Term="Common.Label" String="COMPANYID: COMPANYID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.COMPANY/COMPANYNAME">
+                <Annotation Term="Common.Label" String="COMPANYNAME: COMPANYNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.COMPANY/ADDRESSID">
+                <Annotation Term="Common.Label" String="ADDRESSID: ADDRESSID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.DEPARTMENT/DEPARTMENTID">
+                <Annotation Term="Common.Label" String="DEPARTMENTID: DEPARTMENTID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.DEPARTMENT/DEPARTMENTNAME">
+                <Annotation Term="Common.Label" String="DEPARTMENTNAME: DEPARTMENTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.DEPARTMENT/DEPARTMENTMANAGERID">
+                <Annotation Term="Common.Label" String="DEPARTMENTMANAGERID: DEPARTMENTMANAGERID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.DEPARTMENT/BUDGET">
+                <Annotation Term="Common.Label" String="BUDGET: BUDGET"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EXPENSES/ID">
+                <Annotation Term="Common.Label" String="ID: ID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EXPENSES/EMPID">
+                <Annotation Term="Common.Label" String="EMPID: EMPID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EXPENSES/EXPENSEDATE">
+                <Annotation Term="Common.Label" String="EXPENSEDATE: EXPENSEDATE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EXPENSES/EXPENSETYPE">
+                <Annotation Term="Common.Label" String="EXPENSETYPE: EXPENSETYPE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EXPENSES/DESCRIPTION">
+                <Annotation Term="Common.Label" String="DESCRIPTION: DESCRIPTION"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EXPENSES/AMOUNT">
+                <Annotation Term="Common.Label" String="AMOUNT: AMOUNT"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EXPENSES/RECEIPTNUMBER">
+                <Annotation Term="Common.Label" String="RECEIPTNUMBER: RECEIPTNUMBER"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EXPENSES/APPROVALSTATUS">
+                <Annotation Term="Common.Label" String="APPROVALSTATUS: APPROVALSTATUS"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.LEAVES/ID">
+                <Annotation Term="Common.Label" String="ID: ID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.LEAVES/EMPID">
+                <Annotation Term="Common.Label" String="EMPID: EMPID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.LEAVES/STARTDATE">
+                <Annotation Term="Common.Label" String="STARTDATE: STARTDATE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.LEAVES/ENDDATE">
+                <Annotation Term="Common.Label" String="ENDDATE: ENDDATE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.LEAVES/REASON">
+                <Annotation Term="Common.Label" String="REASON: REASON"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.LEAVES/STATUS">
+                <Annotation Term="Common.Label" String="STATUS: STATUS"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.LEAVES/APPLIEDDATE">
+                <Annotation Term="Common.Label" String="APPLIEDDATE: APPLIEDDATE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.LEAVES/COUNTOFDAYS">
+                <Annotation Term="Common.Label" String="COUNTOFDAYS: COUNTOFDAYS"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/ID">
+                <Annotation Term="Common.Label" String="ID: ID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/EMPID">
+                <Annotation Term="Common.Label" String="EMPID: EMPID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/PAYSLIPDATE">
+                <Annotation Term="Common.Label" String="PAYSLIPDATE: PAYSLIPDATE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/SALARY">
+                <Annotation Term="Common.Label" String="SALARY: SALARY"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/OVERTIMEPAY">
+                <Annotation Term="Common.Label" String="OVERTIMEPAY: OVERTIMEPAY"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/BONUS">
+                <Annotation Term="Common.Label" String="BONUS: BONUS"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/DEDUCTIONS">
+                <Annotation Term="Common.Label" String="DEDUCTIONS: DEDUCTIONS"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/TAX">
+                <Annotation Term="Common.Label" String="TAX: TAX"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PAYSLIPS/NETPAY">
+                <Annotation Term="Common.Label" String="NETPAY: NETPAY"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PHONE/PHONEID">
+                <Annotation Term="Common.Label" String="PHONEID: PHONEID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PHONE/COUNTRYCODE">
+                <Annotation Term="Common.Label" String="COUNTRYCODE: COUNTRYCODE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PHONE/PRIMARYPHONENUMBER">
+                <Annotation Term="Common.Label" String="PRIMARYPHONENUMBER: PRIMARYPHONENUMBER"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.PHONE/SECONDARYPHONENUMBER">
+                <Annotation Term="Common.Label" String="SECONDARYPHONENUMBER: SECONDARYPHONENUMBER"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/EMPID">
+                <Annotation Term="Common.Label" String="EMPID: EMPID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/COMPANYID">
+                <Annotation Term="Common.Label" String="COMPANYID: COMPANYID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/FIRSTNAME">
+                <Annotation Term="Common.Label" String="FIRSTNAME: FIRSTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/LASTNAME">
+                <Annotation Term="Common.Label" String="LASTNAME: LASTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/DATEOFBIRTH">
+                <Annotation Term="Common.Label" String="DATEOFBIRTH: DATEOFBIRTH"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/GENDER">
+                <Annotation Term="Common.Label" String="GENDER: GENDER"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/DEPARTMENTID">
+                <Annotation Term="Common.Label" String="DEPARTMENTID: DEPARTMENTID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/JOBID">
+                <Annotation Term="Common.Label" String="JOBID: JOBID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/SALARY">
+                <Annotation Term="Common.Label" String="SALARY: SALARY"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/HIREDATE">
+                <Annotation Term="Common.Label" String="HIREDATE: HIREDATE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/EMAIL">
+                <Annotation Term="Common.Label" String="EMAIL: EMAIL"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/PHONEID">
+                <Annotation Term="Common.Label" String="PHONEID: PHONEID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/ADDRESSID">
+                <Annotation Term="Common.Label" String="ADDRESSID: ADDRESSID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/QUALIFICATIONID">
+                <Annotation Term="Common.Label" String="QUALIFICATIONID: QUALIFICATIONID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeDetailsAP/ROLE">
+                <Annotation Term="Common.Label" String="ROLE: ROLE"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeFunction/EMPID">
+                <Annotation Term="Common.Label" String="EMPID: EMPID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeFunction/FIRSTNAME">
+                <Annotation Term="Common.Label" String="FIRSTNAME: FIRSTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeFunction/LASTNAME">
+                <Annotation Term="Common.Label" String="LASTNAME: LASTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeFunction/DEPARTMENT_BUDGET">
+                <Annotation Term="Common.Label" String="DEPARTMENT_BUDGET: DEPARTMENT_BUDGET"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeFunction/DEPARTMENTNAME">
+                <Annotation Term="Common.Label" String="DEPARTMENTNAME: DEPARTMENTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EntityContainer/InputEmployee">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.ReadRestrictions">
+                    <Record Type="Capabilities.ReadRestrictionsType">
+                        <PropertyValue Property="Readable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.InputEmployee/EMPID">
+                <Annotation Term="Common.Label" String="EMPID: EMPID"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.InputEmployee/FIRSTNAME">
+                <Annotation Term="Common.Label" String="FIRSTNAME: FIRSTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeCountGroupBy/DEPARTMENTNAME">
+                <Annotation Term="Common.Label" String="DEPARTMENTNAME: DEPARTMENTNAME"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EmployeeCountGroupBy/EMPLOYEE_COUNT">
+                <Annotation Term="Common.Label" String="EMPLOYEE_COUNT: EMPLOYEE_COUNT"/>
+            </Annotations>
+            <Annotations Target="DetailsEmployeeServices.EntityContainer/EmployeeTrail">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

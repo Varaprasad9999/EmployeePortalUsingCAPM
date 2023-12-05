@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_PAYSLIPS" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CV_PAYSLIPS.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="DATA_PAYSLIPS">
+    <resourceUri>DATA_PAYSLIPS</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews/>
+<logicalModel id="DATA_PAYSLIPS">
+  <attributes>
+    <attribute id="PAYSLIPDATE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PAYSLIPDATE"/>
+      <keyMapping columnObjectName="DATA_PAYSLIPS" columnName="PAYSLIPDATE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="ID" order="1" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="ID"/>
+      <measureMapping columnObjectName="DATA_PAYSLIPS" columnName="ID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="EMPID" order="2" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="EMPID"/>
+      <measureMapping columnObjectName="DATA_PAYSLIPS" columnName="EMPID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="SALARY" order="4" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="SALARY"/>
+      <measureMapping columnObjectName="DATA_PAYSLIPS" columnName="SALARY"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="OVERTIMEPAY" order="5" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="OVERTIMEPAY"/>
+      <measureMapping columnObjectName="DATA_PAYSLIPS" columnName="OVERTIMEPAY"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="BONUS" order="6" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="BONUS"/>
+      <measureMapping columnObjectName="DATA_PAYSLIPS" columnName="BONUS"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="DEDUCTIONS" order="7" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="DEDUCTIONS"/>
+      <measureMapping columnObjectName="DATA_PAYSLIPS" columnName="DEDUCTIONS"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="TAX" order="8" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="TAX"/>
+      <measureMapping columnObjectName="DATA_PAYSLIPS" columnName="TAX"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="NETPAY" order="9" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="NETPAY"/>
+      <measureMapping columnObjectName="DATA_PAYSLIPS" columnName="NETPAY"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

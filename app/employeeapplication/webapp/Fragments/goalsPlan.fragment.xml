@@ -1,0 +1,56 @@
+<core:FragmentDefinition 
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:forms="sap.ui.layout.form"
+>
+<ObjectPageSection
+                titleUppercase="false"
+                id="goalsSection"
+                title="2024 Goals Plan"
+            >
+            <heading>
+                    <m:MessageStrip
+                        text="Amazing plans that include taking this company to the level that exceeds your expectations."
+                        type="Error"
+                    />
+                </heading>
+                <subSections>
+
+                    <ObjectPageSubSection id="goalsSectionSS1">
+                        <!-- <m:Text text="Hi this is console!" /> -->
+
+                        <m:FlexBox
+                            justifyContent="SpaceAround"
+                            backgroundDesign="Solid"
+                            fitContainer="false"
+                            wrap="Wrap"
+                        >
+                            <m:VBox>
+                                <m:Label
+                                    text="Know about the company"
+                                />
+                                <m:Text text="Done" class="sapUiSmallMarginBegin" />
+                            </m:VBox>
+
+                            <!-- Add a Spacer (Empty Control) Here -->
+
+                            <m:VBox>
+                                <m:Label
+                                    text="Get trained in SAP UI5 and CAPM"
+                                />
+                                <m:Text text="Due Sep 30" class="sapUiSmallMarginBegin"/>
+                            </m:VBox>
+
+                            <m:VBox>
+                                <m:Label text="Develop a project using SAP UI5 and CAPM" />
+                                <m:Text text="Due Oct 31" class="sapUiSmallMarginBegin"/>
+                            </m:VBox>
+                        </m:FlexBox>
+                    </ObjectPageSubSection>
+                    </subSections>
+            </ObjectPageSection>
+               
+ </core:FragmentDefinition>  

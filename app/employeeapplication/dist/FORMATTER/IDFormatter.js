@@ -1,0 +1,1 @@
+sap.ui.define([],function(){"use strict";return{funID:function(e){var n="";if(e<3){n="Success"}else if(e>=3&e<6){n="Warning"}else{n="Error"}return n}}});

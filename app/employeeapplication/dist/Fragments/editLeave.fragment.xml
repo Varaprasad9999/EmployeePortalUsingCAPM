@@ -1,0 +1,163 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:c="sap.ui.webc.main"
+>
+
+<Dialog
+        title="Editing a Saved Leave"
+        id="editLeaveDialog"
+        draggable="true"
+        contentWidth="600px"
+        contentHeight="auto"
+    >
+            <f:Form
+                id="EditLeaveForm"
+                editable="true"
+            >
+                <f:title>
+                    <core:Title text="Edit Leave" />
+                </f:title>
+                <f:layout>
+                    <f:ColumnLayout
+                        columnsM="2"
+                        columnsL="3"
+                        columnsXL="4"
+                    />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:formElements>
+                            <f:FormElement label="Application Date">
+                                <c:DatePicker
+                                    id="appliedDateInput2"
+                                    placeholder="Today's Date"
+                                    width="100%"
+                                    value="{path: 'APPLIEDDATE', formatter: '.dateFormatter.funDate'}"
+                                    required="true"
+                                />
+                                <!-- value="{formatter: '.dateFormatter.getCurrentDate'}" -->
+                            </f:FormElement>
+                            <f:FormElement label="Start Date">
+                                <c:DatePicker
+                                    id="startDateInput2"
+                                    placeholder="Start Date"
+                                    width="100%"
+                                    required="true"
+                                    value="{path: 'STARTDATE', formatter: '.dateFormatter.funDate'}"
+                                    formatPattern="{YYYY-MM-dd}"
+                                />
+                                <!-- value="{formatter: '.dateFormatter.getCurrentDate'}" -->
+                            </f:FormElement>
+                            <f:FormElement label="Half Day" visible="true" id="startHalfDayForm">
+                                <CheckBox
+                                    text="Start Date as Half Day"
+                                    id="startHalfDay2"
+                                    select="onSelectHalfDay"
+                                    visible="true"
+                                    selected="{FIRSTDAYHALFDAY}"
+                                />
+                                <RadioButtonGroup
+                                    id="firstHalfDayGroup2"
+                                    select="onHalfDayChange"
+                                    enabled="true"
+                                    selectedIndex="{FRISTDAYAM}"
+                                    visible="true"
+                                >
+                                    <buttons>
+                                        <RadioButton
+                                            text="AM"
+                                            id="am12"
+                                        />
+                                        <RadioButton
+                                            text="PM"
+                                            id="pm12"
+                                        />
+                                    </buttons>
+                                </RadioButtonGroup>
+                             
+                            </f:FormElement>
+                            <f:FormElement label="End Date">
+                                <c:DatePicker
+                                    id="endDateInput2"
+                                    placeholder="End Date"
+                                    width="100%"
+                                    required="true"
+                                    formatPattern="{YYYY-MM-dd}"
+                                    value="{path: 'ENDDATE', formatter: '.dateFormatter.funDate'}"
+                                    minDate="{path: 'STARTDATE', formatter: '.dateFormatter.funDate'}"
+                                />
+                            </f:FormElement>
+
+                            <f:FormElement label="Half Day">
+                                <CheckBox
+                                    text="End Date as Half Day"
+                                    id="endHalfDay2"
+                                    select="onSelectHalfDay"
+                                    selected="{ENDDAYHALFDAY}"
+                                />
+                                <RadioButtonGroup
+                                    id="secondHalfDayGroup2"
+                                    select="onHalfDayChange2"
+                                    enabled="true"
+                                    selectedIndex="{ENDDAYAM}"
+                                >
+                                    <RadioButton
+                                        id="am22"
+                                        text="AM"
+                                    />
+                                    <RadioButton
+                                        id="pm22"
+                                        text="PM"
+                                    />
+                                </RadioButtonGroup>
+                            </f:FormElement>
+
+                            <f:FormElement label="Count of Days">
+                                <Input
+                                    id="daysCount"
+                                    placeholder="Count of Days"
+                                    value="{COUNTOFDAYS}"
+                                    valueState="None"
+                                />
+                            </f:FormElement>
+                            <f:FormElement label="Reason">
+                                <Input
+                                    id="leaveReason2"
+                                    placeholder="Reason"
+                                    value="{REASON}"
+                                    required="true"
+                                    change="reasonChange"
+                                />
+                            </f:FormElement>
+                            <f:FormElement label="Approval Status">
+                                <Input
+                                    id="leaveStatus2"
+                                    placeholder="Approval Status"
+                                    value="{STATUS}"
+                                    required="true"
+                                />
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+
+        <Button
+            text="Save"
+            type="Emphasized"
+            press="onEditSavedLeave"
+            class="sapUiSmallMarginBeginEnd"
+        />
+        <Button
+            id="this._fragmentfour"
+            text="Cancel"
+            type="Reject"
+            press="onCancelLeave2"
+            class="sapUiSmallMarginEnd"
+        />
+    </Dialog>
+
+</core:FragmentDefinition>

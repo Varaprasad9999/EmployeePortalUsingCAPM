@@ -1,0 +1,178 @@
+<core:FragmentDefinition 
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:forms="sap.ui.layout.form"
+>
+<ObjectPageSection
+                titleUppercase="false"
+                id="personalSection"
+                title="Personal"
+            >
+                <heading>
+                    <!-- <m:MessageStrip
+                        text="{parts: ['i18n>subEng','FIRSTNAME'], formatter: '.dateFormatter.displayi18n'}"
+                        
+                    /> -->
+                    <!-- My name is {0} {1}. I grew up in {6},{7}. I completed my {2} in {3} from {4} with a percentage of {5}.  Currently working as a {8} at {9} in {10} department. -->
+                    <m:MessageStrip 
+                    text="{parts: [
+                    { path: 'i18n>intro' },
+                    { path: 'FIRSTNAME'},
+                    { path: 'LASTNAME'},
+                    { path: 'HIGHESTDEGREE'},
+                    { path: 'YEAREARNED'},
+                    { path: 'COLLEGE'},
+                    { path: 'PERCENTAGE'},
+                    { path: 'CITY'},
+                    { path: 'STATE'},
+                    { path: 'JOBTITLE'},
+                    { path: 'COMPANYNAME'},
+                    { path: 'DEPARTMENTNAME'},
+                    { path: 'i18n>quality'}   ], formatter: 'jQuery.sap.formatMessage'}" />
+
+                </heading>
+                <subSections>
+                    <ObjectPageSubSection
+                        id="personalSectionSS1"
+                        title="Connect"
+                        titleUppercase="false"
+                    >
+                        <m:FlexBox
+                            justifyContent="SpaceAround"
+                            backgroundDesign="Solid"
+                            fitContainer="true"
+                            wrap="Wrap"
+                        >
+                            <m:VBox>
+                                <m:Label
+                                    text="Phone Numbers"
+                                    design="Bold"
+                                    
+                                />
+                                <m:Text text=" " />
+                                <m:Label text="Office Number:" class="sapUiSmallMarginBegin" />
+                                <m:Text text="{PRIMARYPHONENUMBER}" class="sapUiMediumMarginBegin" />
+                                <m:Text text=" " />
+                                <m:Label text="Home Number:" class="sapUiSmallMarginBegin" />
+                                <m:Text
+                                    text="{SECONDARYPHONENUMBER}"
+                                    class="sapUiMediumMarginBegin"
+                                />
+                            </m:VBox>
+
+                            <!-- Add a Spacer (Empty Control) Here -->
+
+                            <m:VBox>
+                                <m:Label
+                                    text="Addresses"
+                                    design="Bold"
+                                />
+                                <m:Text text=" " />
+                                <m:Label text="City:" class="sapUiSmallMarginBegin" />
+                                <m:Text
+                                    text="{CITY}, {STATE}"
+                                    class="sapUiMediumMarginBegin"
+                                />
+                                <m:Text text=" " />
+                                <m:Label text="Country:" class="sapUiSmallMarginBegin" />
+                                <m:Text text="{COUNTRY}" class="sapUiMediumMarginBegin" />
+                            </m:VBox>
+
+                            <m:VBox>
+                                <m:Label
+                                    text="Mailing"
+                                    design="Bold"
+                                />
+                                <m:Text text=" " />
+
+                                <m:Label text="Work:" class="sapUiSmallMarginBegin" />
+                                <m:Text text="{EMAIL}" class="sapUiMediumMarginBegin" />
+                            </m:VBox>
+
+                            <m:VBox>
+                                <m:Label
+                                    text="Social Accounts"
+                                    design="Bold"
+                                />
+                                <m:Text text=" " />
+
+                                <m:Label text="LinkedIn:" class="sapUiSmallMarginBegin" />
+                                <m:Text
+                                    text="/{LASTNAME}.{FIRSTNAME}" class="sapUiMediumMarginBegin"
+                                />
+                                <m:Text text=" " />
+                                <m:Label text="Instagram:" class="sapUiSmallMarginBegin"/>
+                                <m:Text
+                                    text="@{LASTNAME}.{FIRSTNAME}" class="sapUiMediumMarginBegin"
+                                />
+                            </m:VBox>
+
+                            <m:VBox alignItems="End" justifyContent="End" class="sapUiLargeMarginBegin">
+                        <m:Button
+                        id="EditPersonalDetails"
+                            press="OnEditPersonal"
+                            text="Edit Details"
+                        />
+                    </m:VBox>
+
+                    <core:Fragment fragmentName = "com.amista.employeeapplication.Fragments.editPersonal" type="XML" />
+                        </m:FlexBox>
+                    </ObjectPageSubSection>
+                     
+                    <ObjectPageSubSection
+                        id="personalSectionSS2"
+                        title="Payment Information"
+                        titleUppercase="false"
+                    >
+                        <!-- <m:Text text="Hi this is console!" /> -->
+                        <blocks>
+                            <m:FlexBox
+                                justifyContent="SpaceAround"
+                                backgroundDesign="Solid"
+                                fitContainer="false"
+                                wrap="Wrap"
+                            >
+                                <m:VBox class="sapUiLargeMarginEnd">
+                                    <m:Label
+                                        text="Main Payment Method"
+                                        design="Bold"
+                                    />
+
+                                    <m:Text text=" " />
+                                    <m:Label text="Bank Transfer: " class="sapUiSmallMarginBegin"/>
+                                    <m:Text
+                                        text="Account Number: 437{PRIMARYPHONENUMBER}001"
+                                        class="sapUiMediumMarginBegin"
+                                    />
+                                    <m:Text
+                                        text="Bank of Vara, {CITY}"
+                                        class="sapUiMediumMarginBegin"
+                                    />
+                                </m:VBox>
+                            </m:FlexBox>
+                        </blocks>
+
+                        <moreBlocks>
+                            <m:VBox
+                                id="EmpAllowanceInformation"
+                                visible="true"
+                            >
+                                <m:Label
+                                    text="Payment method for Expenses"
+                                    design="Bold"
+                                />
+
+                                <m:Text text=" " />
+                                <m:Label text="Extra Allowance for Expenses:" class="sapUiSmallMarginBegin"/>
+                                <m:Text text="{EMPID}000$ CASH" class="sapUiMediumMarginBegin" />
+                            </m:VBox>
+                        </moreBlocks>
+                       
+
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+ </core:FragmentDefinition>  

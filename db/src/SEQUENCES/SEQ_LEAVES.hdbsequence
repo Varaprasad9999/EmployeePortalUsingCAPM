@@ -1,0 +1,14 @@
+-- const oCDS = require('@sap/cds-dk');
+
+-- module.exports = {
+--     async getNewID(sSequence){
+--         var aResults = await oCDS.run('SELECT '+sSequence+'.NEXTVAL as ID FROM DUMMY');
+--         return aResults[0].ID;
+--     }
+-- }
+
+
+
+
+SEQUENCE SEQ_LVS START WITH 5 MAXVALUE 100000
+RESET BY SELECT IFNULL(MAX(ID),0) + 1 FROM "DATA_LEAVES"

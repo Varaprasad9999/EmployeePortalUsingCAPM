@@ -1,0 +1,12 @@
+{
+    "authenticationMethod": "route",
+    "routes": [
+        {
+            "source": "/(.*)$",
+            "target": "$1",
+            "destination": "custom_router_dest",
+            "csrfProtection": false,
+            "authenticationType": "xsuaa"
+        }
+    ]
+}

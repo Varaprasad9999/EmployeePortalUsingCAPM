@@ -1,0 +1,196 @@
+
+<core:FragmentDefinition
+    xmlns:m="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:c="sap.ui.webc.main"
+>
+
+<!-- editPersonal.fragment.xml ____ Fragment inside a fragment-->
+<m:Dialog
+    title="Edit Personal Details"
+    id="editPersonalDialog"
+    contentWidth="auto"
+    contentHeight="auto"
+    draggable="true"
+>
+    <m:VBox class="sapUiSmallMargin">
+        <f:Form
+            id="FormDisplayColumn_oneGroup234"
+            editable="true"
+        >
+            <f:title>
+                <core:Title text="Edit Personal Details" />
+            </f:title>
+            <f:layout>
+                <f:ColumnLayout
+                    columnsM="2"
+                    columnsL="3"
+                    columnsXL="4"
+                />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer>
+                    <f:formElements>
+                        <f:FormElement label="Office Number">
+                            <m:Input
+                                placeholder="Office Number"
+                                value="{personalDetailsModel>/PRIMARYPHONENUMBER}"
+                                change="phoneNumberChange"
+                            />
+                        </f:FormElement>
+                        <f:FormElement label="Home Number">
+                            <m:Input
+                                placeholder="Home Number"
+                                value="{personalDetailsModel>/SECONDARYPHONENUMBER}"
+                                change="phoneNumberChange"
+                            />
+                        </f:FormElement>
+                        <f:FormElement label="City">
+                            <m:Input
+                                placeholder="City"
+                                value="{personalDetailsModel>/CITY}"
+                                change="addressChange"
+                            />
+                        </f:FormElement>
+                        <f:FormElement label="State">
+                            <m:Input
+                                placeholder="State"
+                                value="{personalDetailsModel>/STATE}"
+                                change="addressChange"
+                            />
+                        </f:FormElement>
+                        <f:FormElement label="Country">
+                            <m:Input
+                                placeholder="Country"
+                                value="{personalDetailsModel>/COUNTRY}"
+                                change="addressChange"
+                            />
+                        </f:FormElement>
+                        <f:FormElement label="Work Email">
+                            <m:Input
+                                placeholder="Work"
+                                value="{personalDetailsModel>/EMAIL}"
+                                change="mailChange"
+                                tooltip="Only Admin Can Edit Work Email"
+                            />
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+    </m:VBox>
+
+    <m:Button
+        text="Save"
+        type="Emphasized"
+        press="onSave"
+        class="sapUiSmallMarginBeginEnd"
+    />
+    <m:Button
+        text="Cancel"
+        type="Reject"
+        press="onCancel"
+        class="sapUiSmallMarginEnd"
+    />
+</m:Dialog>
+
+
+
+</core:FragmentDefinition>
+
+<!-- <Dialog >
+  <Table id="EditFragment" headerText="Edit {LASTNAME}.{FIRSTNAME} details" >
+    <columns>
+      <Column>
+        <Text text="ProductID" />
+      </Column>
+      <Column>
+        <Text text="ProductName" />
+      </Column>
+      <Column>
+        <Text text="Formatted UnitPrice" />
+      </Column>
+    </columns>
+    <items>
+      <ColumnListItem type="Navigation">
+        <cells>
+          <Text text="HI" />
+          <Text text="Hello" />
+          <Text text="Welcome" />
+        </cells>
+      </ColumnListItem>
+    </items>
+  </Table>
+  <endButton>
+    <Button text="Close Fragment" press="CloseFragment"></Button>
+  </endButton>
+</Dialog> -->
+
+
+<!-- <core:FragmentDefinition 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+    <VBox class="sapUiSmallMargin">
+        <f:Form id="FormEditPersonal" editable="true" ariaLabelledBy="TitleEditPersonal">
+            <f:layout>
+                <f:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="3"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="4"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer ariaLabelledBy="TitleOffice">
+                    <f:toolbar>
+                        <Toolbar>
+                            <Title id="TitleOffice" text="Office" />
+                            <ToolbarSpacer />
+                            <Button icon="sap-icon://settings" />
+                        </Toolbar>
+                    </f:toolbar>
+                    <f:formElements>
+                        <f:FormElement label="Home Number">
+                            <f:fields>
+                                <Input value="{HOMENUMBER}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Office Number">
+                            <f:fields>
+                                <Input value="{OFFICENUMBER}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="City">
+                            <f:fields>
+                                <Input value="{CITY}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Country">
+                            <f:fields>
+                                <Input value="{COUNTRY}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Work">
+                            <f:fields>
+                                <Input value="{WORK}" />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+    </VBox>
+</core:FragmentDefinition> -->

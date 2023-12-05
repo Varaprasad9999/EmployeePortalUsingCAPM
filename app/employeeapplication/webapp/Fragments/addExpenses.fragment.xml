@@ -1,0 +1,132 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:c="sap.ui.webc.main"
+    xmlns:u="sap.ui.unified"
+>
+    <Dialog contentWidth="auto"
+        contentHeight="auto"
+        draggable="true">
+        <!-- Expense Form -->
+        	<VBox class="sapUiSmallMargin">
+		<f:Form id="FormDisplayColumn_oneGroup234"
+			editable="true">
+			<f:title>
+				<core:Title text="Add an Expense" />
+			</f:title>
+			<f:layout>
+				<f:ColumnLayout 
+					columnsM="2"
+					columnsL="3"
+					columnsXL="4"
+				/>
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement label="Expense Date">
+							<Input
+                                placeholder="Expense Date"
+                                value="{ExpenseApplication>/EXPENSEDATE}"
+                            />
+						</f:FormElement>
+                        <f:FormElement label="Expense Type">
+							<Input
+                                placeholder="Expense Type"
+                                value="{ExpenseApplication>/EXPENSETYPE}"
+                            />
+						</f:FormElement>
+                        <f:FormElement label="Description">
+							<Input
+                                placeholder="Description"
+                                value="{ExpenseApplication>/DESCRIPTION}"
+                            />
+						</f:FormElement>
+                        <f:FormElement label="Receipt Number">
+							<Input
+                                placeholder="Receipt Number"
+                                value="{ExpenseApplication>/RECEIPTNUMBER}"
+                            />
+						</f:FormElement>
+                        <f:FormElement label="Amount">
+							<Input
+                                placeholder="Amount"
+                                value="{ExpenseApplication>/AMOUNT}"
+                            />
+						</f:FormElement>
+                        <f:FormElement label="Receipt">
+                            <u:FileUploader  id="fileInput" multiple="false" />
+                            <Button text="Upload File" type="Accept" press="onPressfileUpload"></Button>
+                        </f:FormElement>
+                        <f:FormElement label="Approval Status">
+							<Input
+                                placeholder="Approval Status"
+                                value="{ExpenseApplication>/APPROVALSTATUS}"
+                            />
+						</f:FormElement>
+
+						
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+	</VBox>
+
+
+<!-- <beginButton></beginButton> -->
+<Button
+            text="Save"
+            type="Emphasized"
+            press="onSaveExpense"
+            class="sapUiSmallMarginBeginEnd"
+        />
+    <!-- <endButton></endButton>  -->
+    
+    <Button
+            text="Cancel"
+            type="Reject"
+            press="onCancelExpense"
+            class="sapUiSmallMarginEnd"
+        />
+    
+        
+    </Dialog>
+</core:FragmentDefinition>
+
+
+ <!-- <l:Form>
+            <l:title>
+                <core:Title text="This is the title" />
+            </l:title>
+            <l:formContainers>
+                <l:FormContainer title="Add Expense">
+                    <l:formElements>
+                        <l:FormElement label="Expense Type">
+                            <m:Input
+                                placeholder="Expense Type"
+                                
+                            />
+                        </l:FormElement>
+                        <l:FormElement label="Description">
+                            <m:Input
+                                placeholder="Description"
+                                value="Des"
+                            />
+                        </l:FormElement>
+                        <l:FormElement label="Expense Date">
+                            <c:DatePicker
+                            value="03-10-2023"
+                            />
+                        </l:FormElement>
+                        <l:FormElement label="Amount">
+                            <m:Input
+                                placeholder="Amount"
+                                value="1"
+                            />
+                        </l:FormElement>
+                    </l:formElements>
+                </l:FormContainer>
+            </l:formContainers>
+        </l:Form> -->
