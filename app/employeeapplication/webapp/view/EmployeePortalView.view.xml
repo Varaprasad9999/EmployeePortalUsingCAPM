@@ -10,7 +10,9 @@
         showNavButton="true"
         navButtonPress="onPressBackButton"
     >
-        <content />
+        <content /> 
+        <!-- <content />  -->
+        <!-- <Text ></Text> -->
         <!-- <Table
             headerText="Employee Details"
             items="{/EMPLOYEE}"
